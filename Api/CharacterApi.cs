@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EntrepreneurCommon.Models.EsiResponseModels;
 using EntrepreneurEsiApi.Models.Esi;
 using RestSharp;
 
@@ -21,6 +22,30 @@ namespace EntrepreneurEsiApi.Api
             request.AddHeader("Authorization", $"Bearer {token}");
             var response = ApiClient.Execute<CharacterFatigueModel>(request);
             return response;
+        }
+
+        public IRestResponse<LocationOnline> GetCharacterOnlineStatus(Int32 characterId, string token)
+        {
+            var request = new RestRequest(LocationOnline.Endpoint, Method.GET);
+            request.AddUrlSegment("character_id", characterId);
+            request.AddParameter("token", token);
+            return ApiClient.Execute<LocationOnline>(request);
+        }
+
+        public IRestResponse<LocationShip> GetCharacterShip( Int32 characterId, string token )
+        {
+            var request = new RestRequest(LocationShip.Endpoint, Method.GET);
+            request.AddUrlSegment("character_id", characterId);
+            request.AddParameter("token", token);
+            return ApiClient.Execute<LocationShip>(request);
+        }
+
+        public IRestResponse<LocationLocation> GetCharacterLocation( Int32 characterId, string token )
+        {
+            var request = new RestRequest(LocationLocation.Endpoint, Method.GET);
+            request.AddUrlSegment("character_id", characterId);
+            request.AddParameter("token", token);
+            return ApiClient.Execute<LocationLocation>(request);
         }
     }
 }
