@@ -118,6 +118,7 @@
     <Compile Include="Common\DbContextFactory.cs" />
     <Compile Include="DbLayer\DbDataContext.cs" />
     <Compile Include="Models\DatabaseModels\DbCustomPrice.cs" />
+    <Compile Include="Models\DatabaseModels\DbIndustryMiningExtraction.cs" />
     <Compile Include="Models\DatabaseModels\DbMarketCharacterOrder.cs" />
     <Compile Include="Models\DatabaseModels\DbMarketHistoryModel.cs" />
     <Compile Include="Models\DatabaseModels\DbMarketOrderModel.cs" />
@@ -130,7 +131,10 @@
     <Compile Include="Models\EsiResponseModels\EntityMarketOrders.cs" />
     <Compile Include="Models\EsiResponseModels\EsiDataModels.cs" />
     <Compile Include="Models\EsiResponseModels\IndustryCharacterJobResponse.cs" />
-    <Compile Include="Models\EsiResponseModels\IndustryModels.cs" />
+    <Compile Include="Models\EsiResponseModels\IndustryMiningExtractionResponse.cs" />
+    <Compile Include="Models\EsiResponseModels\IndustryMiningLedgerResponse.cs" />
+    <Compile Include="Models\EsiResponseModels\IndustryMiningObserverMiningDone.cs" />
+    <Compile Include="Models\EsiResponseModels\IndustryMiningObserverResponse.cs" />
     <Compile Include="Models\EsiResponseModels\IndustrySystemResponse.cs" />
     <Compile Include="Models\EsiResponseModels\MarketsMarketGroupResponse.cs" />
     <Compile Include="Models\EsiResponseModels\MarketsPriceResponse.cs" />
