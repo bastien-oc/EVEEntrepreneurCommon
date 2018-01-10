@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EntrepreneurCommon.Models.DatabaseModels;
 using EntrepreneurEsiApi.Models.DatabaseModels;
+using EntrepreneurEsiApi.Models.Esi;
 
 namespace EntrepreneurCommon.DbLayer
 {
@@ -32,5 +33,10 @@ namespace EntrepreneurCommon.DbLayer
 
         // Names Cache
         public DbSet<DbUniverseName> UniverseNames { get; set; }
+
+        // Industry
+        public DbSet<DbIndustryMiningExtraction> MiningExtractions { get; set; }
+        public DbSet<IndustryMiningObserverMiningDone> MiningLedgerCorp { get; set; }
+        public DbSet<IndustryMiningObserverResponse> MiningObservers { get; set; }
     }
 }

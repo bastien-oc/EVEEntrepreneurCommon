@@ -115,5 +115,10 @@ namespace EntrepreneurEsiApi.Util
                     yield return t;
             }
         }
+
+        public EsiTokenInfo GetTokenWithScope(int CharacterId, string scope)
+        {
+            return Tokens.FirstOrDefault(x => x.CharacterId == CharacterId && x.CheckScope(scope));
+        }
     }
 }

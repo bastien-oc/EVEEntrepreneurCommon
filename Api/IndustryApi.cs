@@ -63,5 +63,44 @@ namespace EntrepreneurEsiApi.Api
             var response = GetCharacterIndustryJobsData(characterId, token, includeCompleted);
             return response.Data;
         }
+
+        public IRestResponse<List<IndustryMiningExtractionResponse>> GetMiningExtractions(int corporationId, string token)
+        {
+            var request = new RestRequest(IndustryMiningExtractionResponse.Endpoint);
+            request.AddParameter("corporation_id", corporationId, ParameterType.UrlSegment);
+            request.AddParameter("token", token);
+            var response = ApiClient.Execute<List<IndustryMiningExtractionResponse>>(request);
+            return response;
+        }
+
+        public EsiPaginatedResponse<IndustryMiningObserverMiningDone> GetMiningLedgerCorp(int corporationId, long observerId, string token)
+        {
+            var request = new RestRequest(IndustryMiningObserverMiningDone.Endpoint);
+            request.AddParameter("corporation_id", corporationId, ParameterType.UrlSegment);
+            request.AddParameter("observer_id", observerId, ParameterType.UrlSegment);
+            request.AddParameter("token", token, ParameterType.QueryString);
+
+            var response = ApiClient.ExecutePaginated<IndustryMiningObserverMiningDone>(request);
+
+            foreach (var r in response.Items) {
+                r.OwnerID = corporationId;
+                r.ObserverID = observerId;
+            }
+            return response;
+        }
+
+        public EsiPaginatedResponse<IndustryMiningObserverResponse> GetMiningObservers(int corporationId, string token)
+        {
+            var request = new RestRequest(IndustryMiningObserverResponse.Endpoint);
+            request.AddParameter("corporation_id", corporationId, ParameterType.UrlSegment);
+            request.AddParameter("token", token);
+
+            var response = ApiClient.ExecutePaginated<IndustryMiningObserverResponse>(request);
+
+            foreach (var r in response.Items) {
+                r.OwnerID = corporationId;
+            }
+            return response;
+        }
     }
 }
