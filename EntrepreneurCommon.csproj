@@ -136,6 +136,9 @@
     <Compile Include="Models\EsiResponseModels\IndustryMiningObserverMiningDone.cs" />
     <Compile Include="Models\EsiResponseModels\IndustryMiningObserverResponse.cs" />
     <Compile Include="Models\EsiResponseModels\IndustrySystemResponse.cs" />
+    <Compile Include="Models\EsiResponseModels\LocationLocation.cs" />
+    <Compile Include="Models\EsiResponseModels\LocationOnline.cs" />
+    <Compile Include="Models\EsiResponseModels\LocationShip.cs" />
     <Compile Include="Models\EsiResponseModels\MarketsMarketGroupResponse.cs" />
     <Compile Include="Models\EsiResponseModels\MarketsPriceResponse.cs" />
     <Compile Include="Models\EsiResponseModels\MarketsRegionHistoryResponse.cs" />
