@@ -64,7 +64,7 @@ namespace EntrepreneurEsiApi.Authentication
 
         // Forward Character Info
         public Int32 CorporationId { get => CharacterInformation.CorporationID; }
-        public Int32 str { get => CharacterInformation.AllianceID; }
+        public Int32 AllianceId { get => CharacterInformation.AllianceID; }
 
         // Requestable info
         private IRestResponse<CharacterPublicInformation> characterInformationResponse { get; set; }
@@ -75,6 +75,10 @@ namespace EntrepreneurEsiApi.Authentication
 
         // Other
         public Action OnTokenUpdated;
+
+        // Additional application-managable info
+        public string CorporationName { get; set; }
+        public string AllianceName { get; set; }
 
         public void OverrideTokenData( EsiTokenVerification tokenVerification, EsiTokenResponse tokenAccessInfo)
         {

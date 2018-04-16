@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EntrepreneurCommon.Models.DatabaseModels;
+using EntrepreneurCommon.Models.EsiResponseModels;
 using EntrepreneurEsiApi.Models.DatabaseModels;
 using EntrepreneurEsiApi.Models.Esi;
 
@@ -31,6 +32,9 @@ namespace EntrepreneurCommon.DbLayer
         
         public DbSet<DbCustomPrice> MarketCustomPrice { get; set; }
 
+        public DbSet<DbMarketPriceCustom> MarketCustomPriceNew { get; set; }
+        public DbSet<DbMarketRefining> MarketRefining { get; set; }
+
         // Names Cache
         public DbSet<DbUniverseName> UniverseNames { get; set; }
 
@@ -38,5 +42,13 @@ namespace EntrepreneurCommon.DbLayer
         public DbSet<DbIndustryMiningExtraction> MiningExtractions { get; set; }
         public DbSet<IndustryMiningObserverMiningDone> MiningLedgerCorp { get; set; }
         public DbSet<IndustryMiningObserverResponse> MiningObservers { get; set; }
+
+        // Wallet
+        public DbSet<WalletJournalModelChar> WalletJournalCharacter { get; set; }
+        public DbSet<WalletJournalModelCorp> WalletJournalCorporate { get; set; }
+
+        // Entity Market Orders
+        public DbSet<MarketTransactionChar> MarketTransactionsCharacter { get; set; }
+        public DbSet<MarketTransactionCorp> MarketTransactionsCorporate { get; set; }
     }
 }

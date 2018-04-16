@@ -351,49 +351,7 @@ namespace EntrepreneurEsiApi.Models.Esi
         [J("ship_name")] public String ship_name { get; set; }
     }
 
-    [Table("corp_wallet_transactions_esi")]
-    public class MarketTransactionCorp
-    {
-        public static String EndpointVersioned { get => "/v1/corporations/{corporation_id}/wallets/{division}/transactions/"; }
-        public static String Scope { get => "esi-wallet.read_corporation_wallets.v1"; }
-
-        [JsonIgnore] public Int32 OwnerId { get; set; }
-        [JsonIgnore] public Int32 Division { get; set; }
-
-        [JsonIgnore] public String OwnerName { get; set; }
-
-        [J("transaction_id")] public Int64 TransactionId { get; set; }
-        [J("date")] public DateTime Date { get; set; }
-        [J("type_id")] public Int32 TypeId { get; set; }
-        [J("location_id")] public Int64 LocationId { get; set; }
-        [J("unit_price")] public double UnitPrice { get; set; }
-        [J("quantity")] public Int32 Quantity { get; set; }
-        [J("client_id")] public Int32 ClientId { get; set; }
-        [J("is_buy")] public Boolean IsBuy { get; set; }
-        [J("is_personal")] public Boolean IsPersonal { get; set; }
-        [J("journal_ref_id")] public Int64 JournalRefId { get; set; }
-    }
-
-    [Table("char_wallet_transactions_esi")]
-    public class MarketTransactionChar
-    {
-        [JsonIgnore] public static String EndpointVersioned { get => "/v1/characters/{character_id}/wallet/transactions/"; }
-        [JsonIgnore] public static String Scope { get => "esi-wallet.read_character_wallet.v1"; }
-
-        [JsonIgnore] public Int32 OwnerId { get; set; }
-        [JsonIgnore] public String OwnerName { get; set; }
-
-        [J("transaction_id")] public Int64 TransactionId { get; set; }
-        [J("date")] public DateTime Date { get; set; }
-        [J("type_id")] public Int32 TypeId { get; set; }
-        [J("location_id")] public Int64 LocationId { get; set; }
-        [J("unit_price")] public double UnitPrice { get; set; }
-        [J("quantity")] public Int32 Quantity { get; set; }
-        [J("client_id")] public Int32 ClientId { get; set; }
-        [J("is_buy")] public Boolean IsBuy { get; set; }
-        [J("is_personal")] public Boolean IsPersonal { get; set; }
-        [J("journal_ref_id")] public Int64 JournalRefId { get; set; }
-    }
+    
 
     [JsonConverter(typeof(StringEnumConverter))]
     public enum RolesEnum

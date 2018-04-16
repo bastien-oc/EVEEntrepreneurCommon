@@ -8,6 +8,7 @@ using EntrepreneurEsiApi.Models.EsiResponseModels;
 using EntrepreneurEsiApi.Api;
 using EntrepreneurEsiApi.Models.Esi;
 using RestSharp;
+using EntrepreneurCommon.Models.EsiResponseModels;
 
 namespace EntrepreneurEsiApi.Api
 {
@@ -223,6 +224,37 @@ namespace EntrepreneurEsiApi.Api
         public IEnumerable<MarketsPriceResponse> GetMarketPrices()
         {
             return GetMarketPricesData().Data;
+        }
+
+        public IRestResponse<List<MarketTransactionCorp>> GetCorpMarketTransactions(int corporationId, int division, string token)
+        {
+            var request = new RestRequest(MarketTransactionCorp.EndpointVersioned, Method.GET);
+            request.AddParameter("corporation_id", corporationId, ParameterType.UrlSegment);
+            request.AddParameter("division", division, ParameterType.UrlSegment);
+            request.AddParameter("token", token);
+            var result = ApiClient.Execute<List<MarketTransactionCorp>>(request);
+
+            // Assign request parameters
+            foreach (var t in result.Data) {
+                t.Division = division;
+                t.OwnerId = corporationId;
+            }
+
+            return result;
+        }
+
+        public IRestResponse<List<MarketTransactionChar>> GeCharacterMarketTransactions(int characterId, string token)
+        {
+            var request = new RestRequest(MarketTransactionChar.EndpointVersioned, Method.GET);
+            request.AddParameter("character_id", characterId, ParameterType.UrlSegment);
+            request.AddParameter("token", token);
+            var result = ApiClient.Execute<List<MarketTransactionChar>>(request);
+
+            foreach (var t in result.Data) {
+                t.OwnerId = characterId;
+            }
+
+            return result;
         }
 
 
