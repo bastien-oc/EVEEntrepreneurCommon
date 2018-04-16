@@ -55,6 +55,7 @@ namespace EntrepreneurEsiApi.Util
             if (!File.Exists(filePath)) { return; }
             string _content = File.ReadAllText(filePath);
             _tokens = JsonConvert.DeserializeObject<List<EsiTokenInfo>>(_content);
+            if (_tokens == null) { return; }
             foreach (var t in _tokens) {
                 t.AuthClient = AuthClient;
             }

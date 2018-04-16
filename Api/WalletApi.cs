@@ -29,6 +29,25 @@ namespace EntrepreneurEsiApi.Api
         public EsiPaginatedResponse<WalletJournalModelChar> GetCharacterWalletJournalCompleteWithInfo( int characterId, string token )
         { return ApiClient.ExecutePaginated<WalletJournalModelChar>(WalletJournalModelChar.Endpoint, Method.GET, null, token, null); }
 
+        public List<WalletJournalModelCorp> GetCorporationWalletJournalComplete(int corporationId, int divisionId, string token)
+        {
+            Parameter param1 = new Parameter() { Name = "corporation_id", Value = corporationId, Type = ParameterType.UrlSegment };
+            Parameter param2 = new Parameter() { Name = "division", Value = divisionId, Type = ParameterType.UrlSegment };
+
+            var result = ApiClient.ExecutePaginated<WalletJournalModelCorp>(
+                WalletJournalModelCorp.EndpointVersioned, parameters: new Parameter[] { param1, param2 }, token: token);
+            return result.Items;
+        }
+
+        public EsiPaginatedResponse<WalletJournalModelCorp> GetCorporationWalletJournalCompleteWithInfo (int corporationId, int divisionId, string token)
+        {
+            Parameter param1 = new Parameter() { Name = "corporation_id", Value = corporationId, Type = ParameterType.UrlSegment };
+            Parameter param2 = new Parameter() { Name = "division", Value = divisionId, Type = ParameterType.UrlSegment };
+
+            return ApiClient.ExecutePaginated<WalletJournalModelCorp>(
+                WalletJournalModelCorp.EndpointVersioned, parameters: new Parameter[] { param1, param2 }, token: token);
+        }
+
         public List<WalletJournalModelChar> GetWalletJournal( int characterId, string token, int? page = null )
         {
             RestRequest request = new RestRequest(WalletJournalModelChar.Endpoint, Method.GET);

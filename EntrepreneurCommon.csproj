@@ -31,7 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.1</LangVersion>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -49,8 +49,8 @@
     <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\EVE Enterpreneur\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=6.10.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\EVE Enterpreneur\packages\MySql.Data.6.10.5\lib\net452\MySql.Data.dll</HintPath>
+    <Reference Include="MySql.Data, Version=6.10.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\EVE Enterpreneur\packages\MySql.Data.6.10.6\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data.Entity.EF6, Version=6.9.10.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\EVE Enterpreneur\packages\MySql.Data.Entity.6.9.10\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
@@ -117,11 +117,14 @@
     <Compile Include="Authentication\EsiAuthModels.cs" />
     <Compile Include="Common\DbContextFactory.cs" />
     <Compile Include="DbLayer\DbDataContext.cs" />
+    <Compile Include="DbLayer\DbPersistenceContext.cs" />
     <Compile Include="Models\DatabaseModels\DbCustomPrice.cs" />
     <Compile Include="Models\DatabaseModels\DbIndustryMiningExtraction.cs" />
     <Compile Include="Models\DatabaseModels\DbMarketCharacterOrder.cs" />
     <Compile Include="Models\DatabaseModels\DbMarketHistoryModel.cs" />
     <Compile Include="Models\DatabaseModels\DbMarketOrderModel.cs" />
+    <Compile Include="Models\DatabaseModels\DbMarketPriceCustom.cs" />
+    <Compile Include="Models\DatabaseModels\DbMarketRefining.cs" />
     <Compile Include="Models\DatabaseModels\DbMarketStatModel.cs" />
     <Compile Include="Models\DatabaseModels\DbStructureInfo.cs" />
     <Compile Include="Models\DatabaseModels\DbUniverseName.cs" />
@@ -144,6 +147,7 @@
     <Compile Include="Models\EsiResponseModels\MarketsRegionHistoryResponse.cs" />
     <Compile Include="Models\EsiResponseModels\MarketsStructureOrderResponse.cs" />
     <Compile Include="Models\EsiResponseModels\MarketsRegionOrderResponse.cs" />
+    <Compile Include="Models\EsiResponseModels\MarketTransactions.cs" />
     <Compile Include="Models\EsiResponseModels\UniverseNameResponse.cs" />
     <Compile Include="Models\EsiResponseModels\UniverseStructureResponse.cs" />
     <Compile Include="Models\EsiResponseModels\WalletDataModels.cs" />
@@ -163,6 +167,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="docs\MySqlCommand.xml" />
     <Content Include="docs\MySqlCommandBuilder.xml" />
     <Content Include="docs\MySqlConnection.xml" />
@@ -175,10 +182,6 @@
     <Content Include="docs\MySqlParameterCollection.xml" />
     <Content Include="docs\MySqlTransaction.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\EVE Enterpreneur\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\EVE Enterpreneur\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
