@@ -46,6 +46,22 @@ namespace EntrepreneurEsiApi.Authentication
             _client = new HttpClient();
         }
 
+        public string GetRedirectUrl(string scopes)
+        {
+            NameValueCollection _q = HttpUtility.ParseQueryString("");
+            _q["response_type"] = "code";
+            _q["redirect_uri"] = CallbackUrl;
+            _q["client_id"] = ClientId;
+            _q["scope"] = scopes;
+
+            var builder = new UriBuilder(BaseUrl) {
+                Path = pathAuthorize,
+                Query = _q.ToString()
+            };
+
+            return builder.ToString();
+        }
+
         public void RedirectToLogin( string scopes )
         {
             NameValueCollection _q = HttpUtility.ParseQueryString("");
@@ -71,7 +87,7 @@ namespace EntrepreneurEsiApi.Authentication
         {
             var Token = await RequestAccessToken(authorizationCode, firstTime);
             var Verification = await RequestTokenVerification(Token.AccessToken);
-            return new EsiTokenInfo(Token, Verification);
+            return new EsiTokenInfo(Token, Verification, this);
         }
 
         /// <summary>

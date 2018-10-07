@@ -95,6 +95,13 @@ namespace EntrepreneurEsiApi.Authentication
             this.tokenVerification = TokenVerification;
         }
 
+        public EsiTokenInfo(EsiTokenResponse AccessToken, EsiTokenVerification TokenVerification, EsiAuthClient Client)
+        {
+            this.tokenAccessInfo = AccessToken;
+            this.tokenVerification = TokenVerification;
+            this.AuthClient = Client;
+        }
+
         /// <summary>
         /// Fully refreshes the token's AccessToken and VerificationInfo fields.
         /// </summary>
