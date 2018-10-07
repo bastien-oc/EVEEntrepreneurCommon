@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using EntrepreneurCommon.Authentication;
 using EntrepreneurEsiApi.Models.Esi;
 using EntrepreneurEsiApi.Util;
 using RestSharp;
@@ -7,7 +8,7 @@ using RestSharp;
 namespace EntrepreneurEsiApi.Authentication
 {
     // TODO Null checks for RefreshToken - happens when no scopes are selected, i.e: used for authentication only.
-    public partial class EsiTokenInfo
+    public partial class EsiTokenInfo : IEsiTokenContainer
     {
         public EsiTokenInfo( IEsiTokenResponse AccessToken, IEsiTokenVerification TokenVerification )
         {
@@ -50,6 +51,25 @@ namespace EntrepreneurEsiApi.Authentication
             DateTime now = DateTime.Now;
             if (now > exp) { await Refresh(); }
             return AccessToken;
+        }
+
+        public async Task<string> GetAccessToken() => await GetToken();
+
+        public EnumNeedsRefreshing NeedsRefreshing()
+        {
+            if (this.RefreshToken == null) return EnumNeedsRefreshing.Invalid;
+
+            DateTime now = DateTime.Now;
+            DateTime exp = DateTime.Parse(this.Expiry);
+
+            switch (now > exp) {
+                case true:
+                    return EnumNeedsRefreshing.Yes;
+                case false:
+                    return EnumNeedsRefreshing.No;
+                default:
+                    return EnumNeedsRefreshing.No;
+            }
         }
 
 

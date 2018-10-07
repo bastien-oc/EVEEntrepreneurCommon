@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using EntrepreneurCommon.Authentication;
 using Newtonsoft.Json;
 
 namespace EntrepreneurEsiApi.Authentication
@@ -79,7 +80,7 @@ namespace EntrepreneurEsiApi.Authentication
             System.Diagnostics.Process.Start(builder.ToString());
         }
 
-        public enum TokenAuthenticationType { VerifyAuthCode, RefreshToken }
+        
 
         /// <summary>
         /// One-click authorization for NEW tokens. This function is used only for the first authorization.
@@ -103,14 +104,23 @@ namespace EntrepreneurEsiApi.Authentication
         /// <returns></returns>
         public async Task<EsiTokenInfo> GetFullToken(string tokenCodeStr, TokenAuthenticationType authType)
         {
-            bool isAuthorizationCode;
-            if (authType == TokenAuthenticationType.VerifyAuthCode) isAuthorizationCode = true;
-            else isAuthorizationCode = false;
+            bool isAuthorizationCode = authType == TokenAuthenticationType.VerifyAuthCode;
 
             var Token = await RequestAccessToken(tokenCodeStr, isAuthorizationCode);
             var Verification = await RequestTokenVerification(Token.AccessToken);
             // Create token composite with reference to self (EsiAuthClient) to allow tokens self-refresh functionality.
             return new EsiTokenInfo(Token, Verification, this);
+        }
+
+        public async Task<EsiTokenContainer> GetTokenComposite(string tokenCodeStr, TokenAuthenticationType authType)
+        {
+            bool isAuthorizationCode = authType == TokenAuthenticationType.VerifyAuthCode;
+
+            var TokenResponse = await RequestAccessToken(tokenCodeStr, isAuthorizationCode);
+            var Verification = await RequestTokenVerification(TokenResponse.AccessToken);
+
+            return new EsiTokenContainer(TokenResponse,Verification,this);
+
         }
 
         /// <summary>
