@@ -121,7 +121,7 @@ namespace EntrepreneurEsiApi.Authentication
         /// <param name="tokenCode"></param>
         /// <param name="isAuthorizationCode"></param>
         /// <returns></returns>
-        public async Task<EsiTokenResponse> RequestAccessToken( string tokenCode, bool isAuthorizationCode = false )
+        public async Task<IEsiTokenResponse> RequestAccessToken( string tokenCode, bool isAuthorizationCode = false )
         {
             // If we're requesting token from Authorization Code (first time use), make sure we use appropriate 'grant_type'. Getting token from reusable RefreshToken uses different 'grant_type.
             NameValueCollection query = HttpUtility.ParseQueryString("");
@@ -170,7 +170,7 @@ namespace EntrepreneurEsiApi.Authentication
         /// </summary>
         /// <param name="accessToken"></param>
         /// <returns></returns>
-        public async Task<EsiTokenVerification> RequestTokenVerification( string accessToken )
+        public async Task<IEsiTokenVerification> RequestTokenVerification( string accessToken )
         {
             var builder = new UriBuilder(baseUrl) {
                 Path = pathVerify,

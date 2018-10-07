@@ -6,15 +6,16 @@ using RestSharp;
 
 namespace EntrepreneurEsiApi.Authentication
 {
+    // TODO Null checks for RefreshToken - happens when no scopes are selected, i.e: used for authentication only.
     public partial class EsiTokenInfo
     {
-        public EsiTokenInfo( EsiTokenResponse AccessToken, EsiTokenVerification TokenVerification )
+        public EsiTokenInfo( IEsiTokenResponse AccessToken, IEsiTokenVerification TokenVerification )
         {
             this.tokenAccessInfo = AccessToken;
             this.tokenVerification = TokenVerification;
         }
 
-        public EsiTokenInfo(EsiTokenResponse AccessToken, EsiTokenVerification TokenVerification, EsiAuthClient Client)
+        public EsiTokenInfo(IEsiTokenResponse AccessToken, IEsiTokenVerification TokenVerification, EsiAuthClient Client)
         {
             this.tokenAccessInfo = AccessToken;
             this.tokenVerification = TokenVerification;
@@ -27,6 +28,7 @@ namespace EntrepreneurEsiApi.Authentication
         /// <returns></returns>
         public async Task Refresh()
         {
+            if (this.RefreshToken == null) return;
             DateTime now = DateTime.Now;
             DateTime exp = DateTime.Parse(Expiry);
             if (now < exp)
