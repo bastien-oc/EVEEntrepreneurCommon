@@ -1,27 +1,49 @@
 ﻿using System;
+using System.Dynamic;
 using Newtonsoft.Json;
 
-namespace EntrepreneurEsiApi.Authentication {
+namespace EntrepreneurEsiApi.Authentication
+{
     /// <summary>
     /// Extra information about the token.
     /// Result of GET https://esi.tech.ccp.is/verify/
     /// </summary>
+    [JsonObject(MemberSerialization.OptIn)]
     public class EsiTokenVerification : IEsiTokenVerification
     {
-        [JsonProperty("CharacterID")] public Int32 CharacterID { get; set; }
-        [JsonProperty("CharacterName")] public string CharacterName { get; set; }
-        [JsonProperty("CharacterOwnerHash")] public string CharacterOwnerHash { get; set; }
-        [JsonProperty("ExpiresOn")] public string ExpiresOn { get; set; }
-        [JsonProperty("Scopes")] public string Scopes { get; set; }
-        [JsonProperty("TokenType")] public string TokenType { get; set; }
+        public Int32 CharacterId { get; set; }
+        public string CharacterName { get; set; }
+        public string CharacterOwnerHash { get; set; }
+        public string ExpiresOn { get; set; }
+        public string Scopes { get; set; }
+        public string TokenType { get; set; }
+
+        [Obsolete("This is a legacy property, use CharacterId instead. Change in case.", true)]
+        public Int32 CharacterID {
+            get => CharacterId;
+            set => CharacterId = value;
+        }
     }
 
-    public interface IEsiTokenVerification {
-        [JsonProperty("CharacterID")] Int32 CharacterID { get; set; }
-        [JsonProperty("CharacterName")] string CharacterName { get; set; }
-        [JsonProperty("CharacterOwnerHash")] string CharacterOwnerHash { get; set; }
-        [JsonProperty("ExpiresOn")] string ExpiresOn { get; set; }
-        [JsonProperty("Scopes")] string Scopes { get; set; }
-        [JsonProperty("TokenType")] string TokenType { get; set; }
+    [JsonObject(MemberSerialization.OptIn)]
+    public interface IEsiTokenVerification
+    {
+        [JsonProperty("CharacterID")]
+        Int32 CharacterId { get; set; }
+
+        [JsonProperty("CharacterName")]
+        string CharacterName { get; set; }
+
+        [JsonProperty("CharacterOwnerHash")]
+        string CharacterOwnerHash { get; set; }
+
+        [JsonProperty("ExpiresOn")]
+        string ExpiresOn { get; set; }
+
+        [JsonProperty("Scopes")]
+        string Scopes { get; set; }
+
+        [JsonProperty("TokenType")]
+        string TokenType { get; set; }
     }
 }
