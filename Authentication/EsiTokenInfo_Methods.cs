@@ -2,91 +2,10 @@
 using System.Threading.Tasks;
 using EntrepreneurEsiApi.Models.Esi;
 using EntrepreneurEsiApi.Util;
-using Newtonsoft.Json;
-using Nito.AsyncEx;
 using RestSharp;
-using J = Newtonsoft.Json.JsonPropertyAttribute;
 
 namespace EntrepreneurEsiApi.Authentication
 {
-    public class EsiTokenVerification
-    {
-        [J("CharacterID")] public Int32 CharacterID { get; set; }
-        [J("CharacterName")] public string CharacterName { get; set; }
-        [J("CharacterOwnerHash")] public string CharacterOwnerHash { get; set; }
-        [J("ExpiresOn")] public string ExpiresOn { get; set; }
-        [J("Scopes")] public string Scopes { get; set; }
-        [J("TokenType")] public string TokenType { get; set; }
-    }
-
-    public partial class EsiTokenResponse
-    {
-        [J("access_token")] public string AccessToken { get; set; }
-        [J("expires_in")] public Int32 ExpiresIn { get; set; }
-        [J("refresh_token")] public string RefreshToken { get; set; }
-        [J("token_type")] public string TokenType { get; set; }
-    }
-
-    [JsonObject(MemberSerialization.OptIn)]
-    public partial class EsiTokenInfo
-    {
-        // Main fields
-        [J("Verificationinfo")]     private EsiTokenVerification tokenVerification;
-        [J("TokenInfo")]            private EsiTokenResponse tokenAccessInfo;
-        [J("Enabled")]              private bool _enabled = true;
-                                    private CharacterPublicInformation characterInformation;
-                                    private CharacterRolesModel characterRoles;
-
-        // Workaround fields
-        public EsiAuthClient AuthClient;
-
-        //public EsiTokenVerification TokenVerification { get; set; }
-        //public EsiTokenResponse TokenAccessInfo { get; set; }
-        
-        public Boolean Enabled { get => _enabled; set => _enabled = value; }
-
-        // Forward TokenVerification Info
-        public Int32 CharacterId { get => tokenVerification.CharacterID; }
-        public string CharacterName { get => tokenVerification.CharacterName; }
-        public string CharacterOwnerHash { get => tokenVerification.CharacterOwnerHash; }
-        public string Expiry { get => tokenVerification.ExpiresOn; }
-        public string Scopes { get => tokenVerification.Scopes; }
-        public string TokenTypeVerification { get => tokenVerification.TokenType; }
-
-        // Forward TokenResponse info
-        public string RefreshToken { get => tokenAccessInfo.RefreshToken; }
-        public string AccessToken { get => tokenAccessInfo.AccessToken; }
-        public string TokenType { get => tokenAccessInfo.TokenType; }
-        public Int32 ExpiresIn { get => tokenAccessInfo.ExpiresIn; }
-
-        // Automatic token refreshing
-        public string AccessTokenAuto { get => AsyncContext.Run(GetToken); }
-
-        // Forward Character Info
-        public Int32 CorporationId { get => CharacterInformation.CorporationID; }
-        public Int32 AllianceId { get => CharacterInformation.AllianceID; }
-
-        // Requestable info
-        private IRestResponse<CharacterPublicInformation> characterInformationResponse { get; set; }
-        private IRestResponse<CharacterRolesModel> characterRolesResponse { get; set; }
-
-        [J("CharacterInformation")]     public CharacterPublicInformation CharacterInformation { get => GetCharacterInformation(); }
-        [J("CharacterRoles")]           public CharacterRolesModel CharacterRoles { get => GetCharacterRoles(); }
-
-        // Other
-        public Action OnTokenUpdated;
-
-        // Additional application-managable info
-        public string CorporationName { get; set; }
-        public string AllianceName { get; set; }
-
-        public void OverrideTokenData( EsiTokenVerification tokenVerification, EsiTokenResponse tokenAccessInfo)
-        {
-            this.tokenVerification = tokenVerification;
-            this.tokenAccessInfo = tokenAccessInfo;
-        }
-    }
-
     public partial class EsiTokenInfo
     {
         public EsiTokenInfo( EsiTokenResponse AccessToken, EsiTokenVerification TokenVerification )
