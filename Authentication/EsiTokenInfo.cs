@@ -10,11 +10,11 @@ namespace EntrepreneurEsiApi.Authentication {
     /// </summary>
     /// TODO: Rename the class to something more intuitive, like EsiTokenContainer or EsiTokenWrapper?
     [JsonObject(MemberSerialization.OptIn)]
-    public partial class EsiTokenInfo
+    public partial class EsiTokenInfo 
     {
         // Main fields
-        [JsonProperty("Verificationinfo")]  private EsiTokenVerification tokenVerification;
-        [JsonProperty("TokenInfo")]         private EsiTokenResponse tokenAccessInfo;
+        [JsonProperty("Verificationinfo")]  private IEsiTokenVerification tokenVerification;
+        [JsonProperty("TokenInfo")]         private IEsiTokenResponse tokenAccessInfo;
         [JsonProperty("Enabled")]           private bool _enabled = true;
                                             private CharacterPublicInformation characterInformation;
                                             private CharacterRolesModel characterRoles;
