@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -78,20 +79,44 @@ namespace EntrepreneurEsiApi.Authentication
             System.Diagnostics.Process.Start(builder.ToString());
         }
 
+        public enum TokenAuthenticationType { VerifyAuthCode, RefreshToken }
+
         /// <summary>
         /// One-click authorization for NEW tokens. This function is used only for the first authorization.
         /// </summary>
         /// <param name="authorizationCode"></param>
+        /// <param name="firstTime">True if you're generating new token from SSO-provided Code param. False if you're using refreshToken.</param>
         /// <returns></returns>
-        public async Task<EsiTokenInfo> GetFullToken( string authorizationCode, bool firstTime = false )
+        public async Task<EsiTokenInfo> GetFullToken( string authorizationCode, bool firstTime /*= false*/ )
         {
             var Token = await RequestAccessToken(authorizationCode, firstTime);
             var Verification = await RequestTokenVerification(Token.AccessToken);
+            // Create token composite with reference to self (EsiAuthClient) to allow tokens self-refresh functionality.
+            return new EsiTokenInfo(Token, Verification, this);
+        }
+
+        /// <summary>
+        /// One-call method for 
+        /// </summary>
+        /// <param name="tokenCodeStr"></param>
+        /// <param name="authType"></param>
+        /// <returns></returns>
+        public async Task<EsiTokenInfo> GetFullToken(string tokenCodeStr, TokenAuthenticationType authType)
+        {
+            bool isAuthorizationCode;
+            if (authType == TokenAuthenticationType.VerifyAuthCode) isAuthorizationCode = true;
+            else isAuthorizationCode = false;
+
+            var Token = await RequestAccessToken(tokenCodeStr, isAuthorizationCode);
+            var Verification = await RequestTokenVerification(Token.AccessToken);
+            // Create token composite with reference to self (EsiAuthClient) to allow tokens self-refresh functionality.
             return new EsiTokenInfo(Token, Verification, this);
         }
 
         /// <summary>
         /// Request Access Token from either a single-use Authorization Code or refreshable Refresh Token
+        /// https://eveonline-third-party-documentation.readthedocs.io/en/latest/sso/authentication.html
+        /// https://eveonline-third-party-documentation.readthedocs.io/en/latest/sso/refreshtokens.html
         /// </summary>
         /// <param name="tokenCode"></param>
         /// <param name="isAuthorizationCode"></param>
