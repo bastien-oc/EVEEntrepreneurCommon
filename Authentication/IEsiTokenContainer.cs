@@ -8,7 +8,7 @@ namespace EntrepreneurCommon.Authentication {
     public interface IEsiTokenContainer: IEsiTokenVerification, IEsiTokenResponse
     {
         EsiAuthClient AuthClient { get; set; }
-        Task<string> GetAccessToken();
+        Task<string> GetAccessToken(EsiAuthClient client = null);
         EnumNeedsRefreshing NeedsRefreshing();
         bool CheckScope(string scope);
     }
