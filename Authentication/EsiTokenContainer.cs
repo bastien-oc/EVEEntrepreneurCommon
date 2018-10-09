@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -100,10 +101,20 @@ namespace EntrepreneurCommon.Authentication
         /// Refresh token if needed.
         /// </summary>
         /// <returns></returns>
-        public async Task Refresh(bool force = false)
+        public async Task Refresh(bool force = false, EsiAuthClient client = null)
         {
-            if (this.NeedsRefreshing() == EnumNeedsRefreshing.Yes || force)
-            {
+            EsiAuthClient _client;
+            // If client was passed in param, use that, else use the client in AuthClient property.
+            if (client != null) _client = client;
+            else _client = AuthClient;
+
+        #if DEBUG
+            Debug.Assert(_client != null);
+        #endif
+
+            if (_client == null)
+                throw new Exception("There is no EsiAuthClient assigned to the token container. Cannot refresh.");
+            if (this.NeedsRefreshing() == EnumNeedsRefreshing.Yes || force) {
                 this.AssignTokenResponse(await AuthClient.RequestAccessToken(this.RefreshToken));
                 this.AssignTokenVerification(await AuthClient.RequestTokenVerification(this.RefreshToken));
             }
@@ -113,9 +124,9 @@ namespace EntrepreneurCommon.Authentication
         /// Get up-to-date access token, refreshing it if needed.
         /// </summary>
         /// <returns></returns>
-        public async Task<string> GetAccessToken()
+        public async Task<string> GetAccessToken(EsiAuthClient client = null)
         {
-            await Refresh();
+            await Refresh(client: client);
             return this.AccessToken;
         }
 
@@ -130,6 +141,4 @@ namespace EntrepreneurCommon.Authentication
             return false;
         }
     }
-
-
 }
