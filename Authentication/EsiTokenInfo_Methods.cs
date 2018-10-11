@@ -53,7 +53,7 @@ namespace EntrepreneurEsiApi.Authentication
             return AccessToken;
         }
 
-        public async Task<string> GetAccessToken() => await GetToken();
+        public async Task<string> GetAccessToken(EsiAuthClient client = null) => await GetToken();
 
         public EnumNeedsRefreshing NeedsRefreshing()
         {
