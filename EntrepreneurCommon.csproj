@@ -114,9 +114,13 @@
     <Compile Include="Api\MarketApi.cs" />
     <Compile Include="Api\UniverseApi.cs" />
     <Compile Include="Api\WalletApi.cs" />
+    <Compile Include="Authentication\AuthEnums.cs" />
+    <Compile Include="Authentication\EsiScopesHelper.cs" />
+    <Compile Include="Authentication\EsiTokenContainer.cs" />
     <Compile Include="Authentication\EsiTokenInfo.cs" />
     <Compile Include="Authentication\EsiTokenResponse.cs" />
     <Compile Include="Authentication\EsiTokenVerification.cs" />
+    <Compile Include="Authentication\IEsiTokenContainer.cs" />
     <Compile Include="Client\EsiApi.cs" />
     <Compile Include="Api\SystemModels\EsiErrors.cs" />
     <Compile Include="Api\SystemModels\HttpMessageError.cs" />
@@ -160,11 +164,13 @@
     <Compile Include="Models\EsiResponseModels\UniverseNameResponse.cs" />
     <Compile Include="Models\EsiResponseModels\UniverseStructureResponse.cs" />
     <Compile Include="Models\EsiResponseModels\WalletDataModels.cs" />
+    <Compile Include="Models\EsiTokenExtended.cs" />
     <Compile Include="Models\ThirdPartyResponseModels\MarketStatMarketerResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Entities\EveCharacter.cs" />
     <Compile Include="Util\Entities\EveCorporation.cs" />
     <Compile Include="Util\Entities\EveEntity.cs" />
+    <Compile Include="Util\EsiTokenContainerCollection.cs" />
     <Compile Include="Util\EveHelper.cs" />
     <Compile Include="Util\TokenCollection.cs" />
     <Compile Include="Util\TokenManager.cs" />
