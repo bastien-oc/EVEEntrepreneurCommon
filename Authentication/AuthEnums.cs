@@ -16,6 +16,7 @@ namespace EntrepreneurCommon.Authentication
     public enum TokenAuthenticationType
     {
         VerifyAuthCode,
-        RefreshToken
+        RefreshToken,
+        AccessToken
     }
 }
