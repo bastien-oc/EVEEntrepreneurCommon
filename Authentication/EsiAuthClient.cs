@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.UI.WebControls;
 using EntrepreneurCommon.Authentication;
 using Newtonsoft.Json;
 
@@ -26,6 +27,7 @@ namespace EntrepreneurEsiApi.Authentication
         private readonly string pathAuthorize = "oauth/authorize";
         private readonly string pathToken = "oauth/token";
         private readonly string pathVerify = "oauth/verify";
+        private readonly string pathRevoke = "oath/revoke";
 
         public string ClientId { get => clientId; }
         public string CallbackUrl { get => callbackUrl; }
@@ -48,13 +50,15 @@ namespace EntrepreneurEsiApi.Authentication
             _client = new HttpClient();
         }
 
-        public string GetRedirectUrl(string scopes)
+        public string GetRedirectUrl(string scopes, string state = null)
         {
             NameValueCollection _q = HttpUtility.ParseQueryString("");
             _q["response_type"] = "code";
             _q["redirect_uri"] = CallbackUrl;
             _q["client_id"] = ClientId;
             _q["scope"] = scopes;
+            if (state != null)
+                _q["state"] = state;
 
             var builder = new UriBuilder(BaseUrl) {
                 Path = pathAuthorize,
@@ -119,7 +123,7 @@ namespace EntrepreneurEsiApi.Authentication
             var TokenResponse = await RequestAccessToken(tokenCodeStr, isAuthorizationCode);
             var Verification = await RequestTokenVerification(TokenResponse.AccessToken);
 
-            return new EsiTokenContainer(TokenResponse,Verification,this);
+            return new EsiTokenContainer(TokenResponse,Verification, this);
 
         }
 
@@ -207,5 +211,49 @@ namespace EntrepreneurEsiApi.Authentication
             EsiTokenVerification TokenVerification = JsonConvert.DeserializeObject<EsiTokenVerification>(response_string);
             return TokenVerification;
         }
+
+        public async Task<bool> RevokeToken(TokenAuthenticationType tokenType, string token)
+        {
+            // "https://login.eveonline.com/oauth/revoke"
+            var builder = new UriBuilder() {
+                Host = BaseUrl,
+                Path = pathRevoke,
+                Query = ""
+            };
+
+            var request = new HttpRequestMessage() {
+                RequestUri = builder.Uri,
+                Method = HttpMethod.Post
+            };
+
+            request.Headers.Add("User-Agent", UserAgent);
+            request.Headers.Add("Authorization", $"Basic {ClientAuthorization}");
+            request.Headers.Add("Content-Type","application/x-www-form-urlencoded");
+            request.Headers.Add("Host", HostName);
+            //request.Headers.Add("token");
+            var hint = "";
+            switch (tokenType) {
+                case TokenAuthenticationType.AccessToken:
+                    hint = "access_token";
+                    break;
+                case TokenAuthenticationType.RefreshToken:
+                    hint = "refresh_token";
+                    break;
+                case TokenAuthenticationType.VerifyAuthCode:
+                    throw new Exception("Authorization token is not a valid token for revocation.");
+            }
+
+            string body = $"token_type_hint={hint}&token={token}";
+            request.Content = new StringContent(body);
+
+            var response = await _client.SendAsync(request);
+
+            if (!response.IsSuccessStatusCode) {
+                throw new Exception($"Error has occured while revoking a token {token}: {response.StatusCode} - {response.Content.ReadAsStringAsync()}");
+            }
+
+            return true;
+        }
+
     }
 }
