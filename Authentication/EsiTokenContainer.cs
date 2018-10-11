@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EntrepreneurEsiApi.Authentication;
 using Newtonsoft.Json;
+using Nito.AsyncEx;
 
 namespace EntrepreneurCommon.Authentication
 {
@@ -16,15 +18,59 @@ namespace EntrepreneurCommon.Authentication
     [JsonObject(MemberSerialization.OptOut)]
     public class EsiTokenContainer : IEsiTokenContainer
     {
+    #region IEsiTokenResponse, IEsiTokenVerification
+
+        [DisplayName("Character ID")]
         public int CharacterId { get; set; }
+
+        [DisplayName("Character Name")]
         public string CharacterName { get; set; }
+
+        [DisplayName("Owner Hash")]
         public string CharacterOwnerHash { get; set; }
+
+        [DisplayName("Expiry Date")]
         public string ExpiresOn { get; set; }
+
+        [DisplayName("Scopes")]
         public string Scopes { get; set; }
+
+        [DisplayName("Token Type")]
         public string TokenType { get; set; }
+
+        [DisplayName("Access Token (Stored)")]
         public string AccessToken { get; set; }
+
+        [DisplayName("Expires in...")]
         public int ExpiresIn { get; set; }
+
+        [DisplayName("Refresh Token")]
         public string RefreshToken { get; set; }
+
+    #endregion
+
+    #region Supplementary properties
+
+        [DisplayName("Expires in...")]
+        public TimeSpan ExpiresInAuto {
+            get {
+                var span = (DateTime.Parse(ExpiresOn) - DateTime.Now);
+                if (span.TotalSeconds > 0) return span;
+                else return default;
+            }
+        }
+
+        [DisplayName("Requires refreshing?")]
+        public EnumNeedsRefreshing RequiresRefreshing => NeedsRefreshing();
+
+        public string UUID { get; set; }
+
+        public void AssignUUID()
+        {
+            UUID = System.Guid.NewGuid().ToString();
+        }
+    #endregion
+
 
         [JsonIgnore]
         public EsiAuthClient AuthClient { get; set; }
@@ -32,6 +78,8 @@ namespace EntrepreneurCommon.Authentication
         public EsiTokenContainer(IEsiTokenResponse tokenResponse, IEsiTokenVerification tokenVerification = null,
             EsiAuthClient client = null)
         {
+            // Assign Unique Identifier
+            AssignUUID();
             // Get all the important data.
             this.AccessToken = tokenResponse.AccessToken;
             this.ExpiresIn = tokenResponse.ExpiresIn;
@@ -84,7 +132,7 @@ namespace EntrepreneurCommon.Authentication
         {
             if (this.RefreshToken == null) return EnumNeedsRefreshing.Invalid;
 
-            DateTime now = DateTime.Now;
+            DateTime now = DateTime.UtcNow;
             DateTime exp = DateTime.Parse(this.ExpiresOn);
 
             switch (now > exp) {
