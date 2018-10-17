@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
-using EntrepreneurCommon.Authentication;
-using EntrepreneurEsiApi.Models.Esi;
-using EntrepreneurEsiApi.Util;
+using EntrepreneurCommon.Client;
+using EntrepreneurCommon.Models.Esi;
+using EntrepreneurCommon.Util;
 using RestSharp;
 
-namespace EntrepreneurEsiApi.Authentication
+namespace EntrepreneurCommon.Authentication
 {
     // TODO Null checks for RefreshToken - happens when no scopes are selected, i.e: used for authentication only.
     public partial class EsiTokenInfo : IEsiTokenContainer
@@ -36,7 +36,7 @@ namespace EntrepreneurEsiApi.Authentication
                 return; // Token is not expired, no need to refresh it.
 
             tokenAccessInfo = await AuthClient.RequestAccessToken(tokenAccessInfo.RefreshToken);
-            tokenVerification = await AuthClient.RequestTokenVerification(tokenAccessInfo.AccessToken);
+            tokenVerification = await AuthClient.RequestTokenVerificationOld(tokenAccessInfo.AccessToken);
 
             OnTokenUpdated?.Invoke();
         }

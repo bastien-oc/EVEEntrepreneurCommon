@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EntrepreneurEsiApi.Api.SystemModels;
-using EntrepreneurEsiApi.Authentication;
-using EntrepreneurEsiApi.Models.Esi;
+using System.Net;
+using EntrepreneurCommon.Api.SystemModels;
+using EntrepreneurCommon.Models.Esi;
 using Newtonsoft.Json;
 using RestSharp;
 
-namespace EntrepreneurEsiApi.Api
+namespace EntrepreneurCommon.Api
 {
     public partial class EsiApiClient
     {
@@ -36,14 +34,14 @@ namespace EntrepreneurEsiApi.Api
         {
             if (!response.IsSuccessful) {
                 switch (response.StatusCode) {
-                    case (System.Net.HttpStatusCode.InternalServerError):
+                    case (HttpStatusCode.InternalServerError):
                         var _internal = EsiErrors.GetInternalServerError(response.Content);
                         throw new EsiException((int)response.StatusCode, $"{_internal.Error}");
-                    case (System.Net.HttpStatusCode.Forbidden):
+                    case (HttpStatusCode.Forbidden):
                         var _forbidden = EsiErrors.GetForbidden(response.Content);
                         throw new EsiException((int)response.StatusCode, $"{_forbidden.SsoStatus}: {_forbidden.Error}");
                     default:
-                        throw new EsiException((int)response.StatusCode, $"Unsuccessful status code for request {request.Resource}: {response.StatusCode.ToString()} - {response.Content}\n{JsonConvert.SerializeObject(request)}");
+                        throw new EsiException((int)response.StatusCode, $"Unsuccessful status code for request {request.Resource}: {response.StatusCode} - {response.ErrorMessage} - {response.Content}\n{JsonConvert.SerializeObject(request)}");
                 }
             }
         }

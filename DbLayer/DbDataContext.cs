@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using EntrepreneurCommon.Models.DatabaseModels;
 using EntrepreneurCommon.Models.EsiResponseModels;
-using EntrepreneurEsiApi.Models.DatabaseModels;
-using EntrepreneurEsiApi.Models.Esi;
+using EntrepreneurCommon.Models.DatabaseModels;
+using EntrepreneurCommon.Models.Esi;
 
 namespace EntrepreneurCommon.DbLayer
 {
@@ -37,7 +37,7 @@ namespace EntrepreneurCommon.DbLayer
         public DbSet<IndustryMiningObserverResponse> MiningObservers { get; set; }
 
         // Wallet
-        public DbSet<WalletJournalModelChar> WalletJournalCharacter { get; set; }
+        public DbSet<WalletJournalModelCharV4> WalletJournalCharacter { get; set; }
         public DbSet<WalletJournalModelCorp> WalletJournalCorporate { get; set; }
 
         // Entity Market Orders

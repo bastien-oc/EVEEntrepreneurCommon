@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 
-namespace EntrepreneurEsiApi.Api.SystemModels
+namespace EntrepreneurCommon.Api.SystemModels
 {
     public class EsiException:Exception {
         public int ErrorCode { get; set; }

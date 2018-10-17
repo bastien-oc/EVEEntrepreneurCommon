@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EntrepreneurEsiApi.Authentication;
-using EntrepreneurEsiApi.Models.Esi;
+using EntrepreneurCommon.Authentication;
+using EntrepreneurCommon.Models.Esi;
 
-namespace EntrepreneurEsiApi.Util.Entities
+namespace EntrepreneurCommon.Util.Entities
 {
     public partial class EveEntity
     {

@@ -4,7 +4,7 @@ using J = Newtonsoft.Json.JsonPropertyAttribute;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EntrepreneurEsiApi.Models.Esi
+namespace EntrepreneurCommon.Models.Esi
 {
     /// <summary>
     /// Paginated record of all mining seen by an observer

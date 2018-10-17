@@ -2,11 +2,11 @@
 using Newtonsoft.Json;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 
-namespace EntrepreneurEsiApi.Models.Esi
+namespace EntrepreneurCommon.Models.Esi
 {
     public class CharacterPublicInformation
     {
-        [JsonIgnore] public static string Endpoint { get => "/characters/{character_id}/"; }
+        [JsonIgnore] public static string Endpoint { get => "/v4/characters/{character_id}/"; }
         [JsonIgnore] public static string EndpointVersioned { get => "/v4/characters/{character_id}/"; }
 
         [J("alliance_id")] public Int32 AllianceID { get; set; }

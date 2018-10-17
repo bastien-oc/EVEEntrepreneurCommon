@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 
-namespace EntrepreneurEsiApi.Models.Esi
+namespace EntrepreneurCommon.Models.Esi
 {
     public class IndustryCharacterJobResponse
     {

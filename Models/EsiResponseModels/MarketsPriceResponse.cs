@@ -1,7 +1,7 @@
 ﻿using System;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 
-namespace EntrepreneurEsiApi.Models.Esi
+namespace EntrepreneurCommon.Models.Esi
 {
     //public enum OrderRange { station, region, solarsystem, 1, 2, 3, 4, 5, 10, 20, 30, 40 }
 

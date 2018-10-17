@@ -3,7 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 
-namespace EntrepreneurEsiApi.Api.SystemModels
+namespace EntrepreneurCommon.Api.SystemModels
 {
     public class HttpMessageError
     {

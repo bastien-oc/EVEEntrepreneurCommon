@@ -1,11 +1,12 @@
 ﻿using System;
 using EntrepreneurCommon.Authentication;
-using EntrepreneurEsiApi.Models.Esi;
+using EntrepreneurCommon.Client;
+using EntrepreneurCommon.Models.Esi;
 using Newtonsoft.Json;
 using Nito.AsyncEx;
 using RestSharp;
 
-namespace EntrepreneurEsiApi.Authentication
+namespace EntrepreneurCommon.Authentication
 {
     /// <summary>
     /// Custom container class for an ESI token which composites the Access+Refresh Tokens with the Verification response for easy access to extra information. Also includes self-contained methods for retrieving additional, basic information, subject to personal definition.

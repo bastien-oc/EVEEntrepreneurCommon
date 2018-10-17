@@ -4,13 +4,13 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using EntrepreneurEsiApi.Models.EsiResponseModels;
-using EntrepreneurEsiApi.Api;
-using EntrepreneurEsiApi.Models.Esi;
+using EntrepreneurCommon.Models.EsiResponseModels;
+using EntrepreneurCommon.Api;
+using EntrepreneurCommon.Models.Esi;
 using RestSharp;
 using EntrepreneurCommon.Models.EsiResponseModels;
 
-namespace EntrepreneurEsiApi.Api
+namespace EntrepreneurCommon.Api
 {
     public class MarketApi:CommonApi
     {

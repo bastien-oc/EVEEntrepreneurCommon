@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntrepreneurEsiApi.Models.Esi;
+using EntrepreneurCommon.Models.Esi;
 using Newtonsoft.Json;
 
-namespace EntrepreneurEsiApi.Models.DatabaseModels
+namespace EntrepreneurCommon.Models.DatabaseModels
 {
     [Table("market_regional_history")]
     public class DbMarketHistoryModel

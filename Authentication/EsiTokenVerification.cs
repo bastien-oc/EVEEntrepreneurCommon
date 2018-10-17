@@ -2,7 +2,7 @@
 using System.Dynamic;
 using Newtonsoft.Json;
 
-namespace EntrepreneurEsiApi.Authentication
+namespace EntrepreneurCommon.Authentication
 {
     /// <summary>
     /// Extra information about the token.

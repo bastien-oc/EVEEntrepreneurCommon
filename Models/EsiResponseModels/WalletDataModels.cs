@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using Nito.AsyncEx;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 
-namespace EntrepreneurEsiApi.Models.Esi
+namespace EntrepreneurCommon.Models.Esi
 {
     /// <summary>
     /// String and Number correlation between Journal Reference Type Name and Type ID
@@ -143,6 +143,38 @@ namespace EntrepreneurEsiApi.Models.Esi
         system = 4
     }
 
+    [Table("char_wallet_journal")]
+    public class WalletJournalModelCharV4
+    {
+        [JsonIgnore] public static readonly String Endpoint = "/v4/characters/{character_id}/wallet/journal/";
+        [JsonIgnore]
+        [Column("wallet_owner_id", Order = 0), Key, Index("UNIQUE", IsUnique = true, Order = 0)]
+        public int WalletOwnerID { get; set; }
+
+        [JsonIgnore]
+        [Column("wallet_owner_name")]
+        public string WalletOwnerName { get; set; }
+
+        [J("amount")]
+        [Column("amount")]
+        public double Amount { get; set; }
+
+        public double Balance { get; set; }
+        public Int64 ContextId { get; set; }
+        public string ContextIdType { get; set; }
+        public DateTime Date { get; set; }
+        public string Description { get; set; }
+        public Int32 FirstPartyId { get; set; }
+
+        [Column(Order = 1), Key, Index("UNIQUE", IsUnique = true, Order = 1)]
+        public Int64 Id { get; set; }
+        public string Reason { get; set; }
+        public string RefType { get; set; }
+        public Int32 SecondPartyId { get; set; }
+        public double Tax { get; set; }
+        public Int32 TaxReceiverId { get; set; }
+
+    }
     /// <summary>
     /// Retrieve character or corporation wallet journal
     /// /characters/{character_id}/wallet/journal/
@@ -150,7 +182,8 @@ namespace EntrepreneurEsiApi.Models.Esi
     /// Path: (character_id) OR (corporation_id AND division)
     /// </summary>
     [Table("char_wallet_journal")]
-    public class WalletJournalModelChar
+    [Obsolete("Deprecated endpoint", true)]
+    public class WalletJournalModelCharV3
     {
         [JsonIgnore] public static String Endpoint = "/v3/characters/{character_id}/wallet/journal/";
 
@@ -180,7 +213,7 @@ namespace EntrepreneurEsiApi.Models.Esi
         /// </summary>
         [J("date")]
         [Column("date")]
-        [Index("INDEX",IsUnique = false)]
+        //[Index("INDEX",IsUnique = false)]
         public string Date { get; set; }
 
         /// <summary>

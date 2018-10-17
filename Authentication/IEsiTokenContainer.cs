@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
-using EntrepreneurEsiApi.Authentication;
+using EntrepreneurCommon.Authentication;
+using EntrepreneurCommon.Client;
 
 namespace EntrepreneurCommon.Authentication {
     /// <summary>
@@ -8,8 +9,5 @@ namespace EntrepreneurCommon.Authentication {
     public interface IEsiTokenContainer: IEsiTokenVerification, IEsiTokenResponse
     {
         EsiAuthClient AuthClient { get; set; }
-        Task<string> GetAccessToken(EsiAuthClient client = null);
-        EnumNeedsRefreshing NeedsRefreshing();
-        bool CheckScope(string scope);
     }
 }

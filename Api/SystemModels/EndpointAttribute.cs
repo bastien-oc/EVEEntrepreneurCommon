@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EntrepreneurEsiApi.Api.SystemModels
+namespace EntrepreneurCommon.Api.SystemModels
 {
     public class EndpointAttribute:Attribute
     {

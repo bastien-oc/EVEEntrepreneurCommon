@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using EntrepreneurEsiApi.Authentication;
+using EntrepreneurCommon.Authentication;
 
-namespace EntrepreneurEsiApi.Util
+namespace EntrepreneurCommon.Util
 {
     public class TokenCollection:IEnumerable
     {

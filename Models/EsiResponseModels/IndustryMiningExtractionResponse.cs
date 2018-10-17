@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EntrepreneurEsiApi.Models.Esi
+namespace EntrepreneurCommon.Models.Esi
 {
     /// <summary>
     /// Extraction timers for all moon chunks being extracted by refineries belonging to a corporation.

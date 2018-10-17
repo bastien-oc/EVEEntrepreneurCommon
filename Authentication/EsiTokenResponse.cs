@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace EntrepreneurEsiApi.Authentication
+namespace EntrepreneurCommon.Authentication
 {
     /// <summary>
     /// The token itself, containing AccessToken and RefreshToken.

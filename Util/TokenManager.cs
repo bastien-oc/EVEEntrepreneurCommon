@@ -4,13 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntrepreneurEsiApi.Api;
-using EntrepreneurEsiApi.Authentication;
-using EntrepreneurEsiApi.Models.Esi;
-using EntrepreneurEsiApi.Util.Entities;
+using EntrepreneurCommon.Authentication;
+using EntrepreneurCommon.Client;
+using EntrepreneurCommon.Api;
+using EntrepreneurCommon.Models.Esi;
+using EntrepreneurCommon.Util.Entities;
 using Newtonsoft.Json;
 
-namespace EntrepreneurEsiApi.Util
+namespace EntrepreneurCommon.Util
 {
     public partial class TokenManager
     {

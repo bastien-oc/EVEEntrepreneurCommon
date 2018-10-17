@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntrepreneurEsiApi.Models.Esi;
+using EntrepreneurCommon.Models.Esi;
 
 namespace EntrepreneurCommon.Models.DatabaseModels
 {

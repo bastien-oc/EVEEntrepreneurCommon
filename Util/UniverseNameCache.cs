@@ -5,11 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntrepreneurEsiApi.Api;
-using EntrepreneurEsiApi.Models.Esi;
+using EntrepreneurCommon.Api;
+using EntrepreneurCommon.Models.Esi;
 using Newtonsoft.Json;
 
-namespace EntrepreneurEsiApi.Util
+namespace EntrepreneurCommon.Util
 {
     public class UniverseNameCache:IEnumerable
     {
