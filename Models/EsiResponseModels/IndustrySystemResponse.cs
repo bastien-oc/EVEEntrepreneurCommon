@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 
-namespace EntrepreneurEsiApi.Models.Esi
+namespace EntrepreneurCommon.Models.Esi
 {
     /// <summary>
     /// Return the Cost Indices for Solar Systems

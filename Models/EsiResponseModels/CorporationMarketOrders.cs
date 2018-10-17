@@ -1,4 +1,4 @@
-﻿namespace EntrepreneurEsiApi.Models.Esi
+﻿namespace EntrepreneurCommon.Models.Esi
 {
     public class CorporationMarketOrders:EntityMarketOrders
     {

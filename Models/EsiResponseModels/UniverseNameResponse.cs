@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 
-namespace EntrepreneurEsiApi.Models.Esi
+namespace EntrepreneurCommon.Models.Esi
 {
     /// <summary>
     /// Resolve a set of IDs to names and categories. Supported ID’s for resolving are: Characters, Corporations, Alliances, Stations, Solar Systems, Constellations, Regions, Types.

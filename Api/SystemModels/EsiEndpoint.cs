@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace EntrepreneurEsiApi.Api.SystemModels
+namespace EntrepreneurCommon.Api.SystemModels
 {
     public class EsiEndpoint
     {

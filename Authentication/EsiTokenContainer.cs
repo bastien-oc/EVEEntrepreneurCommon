@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using EntrepreneurEsiApi.Authentication;
+using EntrepreneurCommon.Client;
 using Newtonsoft.Json;
-using Nito.AsyncEx;
 
 namespace EntrepreneurCommon.Authentication
 {
@@ -69,15 +66,19 @@ namespace EntrepreneurCommon.Authentication
         {
             UUID = System.Guid.NewGuid().ToString();
         }
+
     #endregion
 
-
-        [JsonIgnore]
+        [JsonIgnore][NotMapped]
         public EsiAuthClient AuthClient { get; set; }
+
+        public EsiTokenContainer() { }
 
         public EsiTokenContainer(IEsiTokenResponse tokenResponse, IEsiTokenVerification tokenVerification = null,
             EsiAuthClient client = null)
         {
+            if (tokenResponse == null)
+                return;
             // Assign Unique Identifier
             AssignUUID();
             // Get all the important data.
@@ -98,6 +99,8 @@ namespace EntrepreneurCommon.Authentication
             if (AuthClient != null) this.AuthClient = AuthClient;
         }
 
+        
+
         public static EsiTokenContainer operator +(EsiTokenContainer left, IEsiTokenResponse right)
         {
             left.AssignTokenResponse(right);
@@ -110,7 +113,7 @@ namespace EntrepreneurCommon.Authentication
             return left;
         }
 
-        protected void AssignTokenResponse(IEsiTokenResponse response)
+        public void AssignTokenResponse(IEsiTokenResponse response)
         {
             this.AccessToken = response.AccessToken;
             this.ExpiresIn = response.ExpiresIn;
@@ -118,7 +121,7 @@ namespace EntrepreneurCommon.Authentication
             this.TokenType = response.TokenType;
         }
 
-        protected void AssignTokenVerification(IEsiTokenVerification response)
+        public void AssignTokenVerification(IEsiTokenVerification response)
         {
             this.CharacterId = response.CharacterId;
             this.CharacterName = response.CharacterName;
@@ -149,44 +152,27 @@ namespace EntrepreneurCommon.Authentication
         /// Refresh token if needed.
         /// </summary>
         /// <returns></returns>
-        public async Task Refresh(bool force = false, EsiAuthClient client = null)
+        public void Refresh(bool force = false, EsiAuthClient client = null)
         {
             EsiAuthClient _client;
             // If client was passed in param, use that, else use the client in AuthClient property.
             if (client != null) _client = client;
             else _client = AuthClient;
 
-        #if DEBUG
-            Debug.Assert(_client != null);
-        #endif
-
             if (_client == null)
                 throw new Exception("There is no EsiAuthClient assigned to the token container. Cannot refresh.");
-            if (this.NeedsRefreshing() == EnumNeedsRefreshing.Yes || force) {
-                this.AssignTokenResponse(await AuthClient.RequestAccessToken(this.RefreshToken));
-                this.AssignTokenVerification(await AuthClient.RequestTokenVerification(this.RefreshToken));
-            }
+
+            _client.RefreshToken(this);
         }
 
         /// <summary>
         /// Get up-to-date access token, refreshing it if needed.
         /// </summary>
         /// <returns></returns>
-        public async Task<string> GetAccessToken(EsiAuthClient client = null)
+        public string GetAccessToken(EsiAuthClient client = null)
         {
-            await Refresh(client: client);
+            Refresh(client: client);
             return this.AccessToken;
-        }
-
-        /// <summary>
-        /// Checks whether the token contains specified scope.
-        /// </summary>
-        /// <param name="scope"></param>
-        /// <returns></returns>
-        public bool CheckScope(string scope)
-        {
-            if (this.Scopes.ToLower().Contains(scope.ToLower())) return true;
-            return false;
         }
     }
 }

@@ -2,7 +2,7 @@
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 using C = System.ComponentModel.DataAnnotations.Schema.ColumnAttribute;
 
-namespace EntrepreneurEsiApi.Models.Esi
+namespace EntrepreneurCommon.Models.Esi
 {
     /// <summary>
     /// Return a list of historical market statistics for the specified type in a region

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntrepreneurEsiApi.Authentication;
-using EntrepreneurEsiApi.Models;
-using EntrepreneurEsiApi.Models.Esi;
+using EntrepreneurCommon.Api;
+using EntrepreneurCommon.Authentication;
+using EntrepreneurCommon.Models;
+using EntrepreneurCommon.Models.Esi;
 using RestSharp;
 
-namespace EntrepreneurEsiApi.Api
+namespace EntrepreneurCommon.Api
 {
     public class UniverseApi
     {

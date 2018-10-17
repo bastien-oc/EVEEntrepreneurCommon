@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EntrepreneurCommon.Models.EsiResponseModels;
-using EntrepreneurEsiApi.Models.Esi;
+using EntrepreneurCommon.Api;
+using EntrepreneurCommon.Models.Esi;
 using RestSharp;
 
-namespace EntrepreneurEsiApi.Api
+namespace EntrepreneurCommon.Api
 {
     public partial class CharacterApi : CommonApi
     {
@@ -46,6 +47,13 @@ namespace EntrepreneurEsiApi.Api
             request.AddUrlSegment("character_id", characterId);
             request.AddParameter("token", token);
             return ApiClient.Execute<LocationLocation>(request);
+        }
+
+        public IRestResponse<CharacterPublicInformation> GetCharacterPublicInformation(Int32 characterId)
+        {
+            var request = new RestRequest(CharacterPublicInformation.Endpoint);
+            request.AddUrlSegment("character_id", characterId);
+            return ApiClient.Execute<CharacterPublicInformation>(request);
         }
     }
 }

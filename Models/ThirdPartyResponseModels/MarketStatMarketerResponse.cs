@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntrepreneurEsiApi.Models.ThirdPartyResponseModels
+namespace EntrepreneurCommon.Models.ThirdPartyResponseModels
 {
     using J = Newtonsoft.Json.JsonPropertyAttribute;
 

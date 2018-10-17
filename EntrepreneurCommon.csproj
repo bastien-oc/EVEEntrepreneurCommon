@@ -70,8 +70,8 @@
     <Reference Include="Nito.AsyncEx.Enlightenment, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\EVE Enterpreneur\packages\Nito.AsyncEx.4.0.1\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp, Version=106.1.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
-      <HintPath>..\EVE Enterpreneur\packages\RestSharp.106.1.0\lib\net452\RestSharp.dll</HintPath>
+    <Reference Include="RestSharp, Version=106.5.2.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Tinkering Projects\ASP.NET\packages\RestSharp.106.5.2\lib\net452\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="Api\CharacterApi.cs" />
     <Compile Include="Api\CommonApi.cs" />
+    <Compile Include="Api\CorporationApi.cs" />
     <Compile Include="Api\IndustryApi.cs" />
     <Compile Include="Api\MarketApi.cs" />
     <Compile Include="Api\UniverseApi.cs" />
@@ -126,8 +127,9 @@
     <Compile Include="Api\SystemModels\HttpMessageError.cs" />
     <Compile Include="Api\SystemModels\EndpointAttribute.cs" />
     <Compile Include="Api\SystemModels\EsiEndpoint.cs" />
-    <Compile Include="Authentication\EsiAuthClient.cs" />
+    <Compile Include="Client\EsiAuthClient.cs" />
     <Compile Include="Authentication\EsiTokenInfo_Methods.cs" />
+    <Compile Include="Client\EsiAuthClient_Obsoletes.cs" />
     <Compile Include="Common\DbContextFactory.cs" />
     <Compile Include="DbLayer\DbDataContext.cs" />
     <Compile Include="DbLayer\DbPersistenceContext.cs" />
@@ -141,9 +143,11 @@
     <Compile Include="Models\DatabaseModels\DbMarketStatModel.cs" />
     <Compile Include="Models\DatabaseModels\DbStructureInfo.cs" />
     <Compile Include="Models\DatabaseModels\DbUniverseName.cs" />
+    <Compile Include="Models\EsiEndpointAttribute.cs" />
     <Compile Include="Models\EsiResponseModels\CharacterMarketOrders.cs" />
     <Compile Include="Models\EsiResponseModels\CharacterPublicInformation.cs" />
     <Compile Include="Models\EsiResponseModels\CorporationMarketOrders.cs" />
+    <Compile Include="Models\EsiResponseModels\CorporationPublicInformation.cs" />
     <Compile Include="Models\EsiResponseModels\EntityMarketOrders.cs" />
     <Compile Include="Models\EsiResponseModels\EsiDataModels.cs" />
     <Compile Include="Models\EsiResponseModels\IndustryCharacterJobResponse.cs" />
@@ -161,6 +165,7 @@
     <Compile Include="Models\EsiResponseModels\MarketsStructureOrderResponse.cs" />
     <Compile Include="Models\EsiResponseModels\MarketsRegionOrderResponse.cs" />
     <Compile Include="Models\EsiResponseModels\MarketTransactions.cs" />
+    <Compile Include="Models\EsiResponseModels\NameToIdResponse.cs" />
     <Compile Include="Models\EsiResponseModels\UniverseNameResponse.cs" />
     <Compile Include="Models\EsiResponseModels\UniverseStructureResponse.cs" />
     <Compile Include="Models\EsiResponseModels\WalletDataModels.cs" />

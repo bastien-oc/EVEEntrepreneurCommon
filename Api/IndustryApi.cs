@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntrepreneurEsiApi.Models.Esi;
+using EntrepreneurCommon.Models.Esi;
 using RestSharp;
 
-namespace EntrepreneurEsiApi.Api
+namespace EntrepreneurCommon.Api
 {
-    public class IndustryApi:CommonApi
+    public class IndustryApi : CommonApi
     {
-        public IndustryApi( EsiApiClient apiClient ) : base(apiClient)
-        {
-        }
+        public IndustryApi(EsiApiClient apiClient) : base(apiClient) { }
 
         /// <summary>
         /// Return cost indices for solar systems
@@ -42,7 +40,8 @@ namespace EntrepreneurEsiApi.Api
         /// <param name="token"></param>
         /// <param name="includeCompleted"></param>
         /// <returns></returns>
-        public IRestResponse<List<IndustryCharacterJobResponse>> GetCharacterIndustryJobsData(int characterId, string token, bool includeCompleted = true)
+        public IRestResponse<List<IndustryCharacterJobResponse>> GetCharacterIndustryJobsData(int characterId,
+            string token, bool includeCompleted = true)
         {
             var request = new RestRequest(IndustryCharacterJobResponse.Endpoint);
             request.AddParameter("character_id", characterId, ParameterType.UrlSegment);
@@ -51,6 +50,7 @@ namespace EntrepreneurEsiApi.Api
             var response = ApiClient.Execute<List<IndustryCharacterJobResponse>>(request);
             return response;
         }
+
         /// <summary>
         /// List industry jobs placed by a character
         /// </summary>
@@ -58,13 +58,15 @@ namespace EntrepreneurEsiApi.Api
         /// <param name="token"></param>
         /// <param name="includeCompleted"></param>
         /// <returns></returns>
-        public IEnumerable<IndustryCharacterJobResponse> GetCharacterIndustryJobs(int characterId, string token, bool includeCompleted = true )
+        public IEnumerable<IndustryCharacterJobResponse> GetCharacterIndustryJobs(int characterId, string token,
+            bool includeCompleted = true)
         {
             var response = GetCharacterIndustryJobsData(characterId, token, includeCompleted);
             return response.Data;
         }
 
-        public IRestResponse<List<IndustryMiningExtractionResponse>> GetMiningExtractions(int corporationId, string token)
+        public IRestResponse<List<IndustryMiningExtractionResponse>> GetMiningExtractions(int corporationId,
+            string token)
         {
             var request = new RestRequest(IndustryMiningExtractionResponse.Endpoint);
             request.AddParameter("corporation_id", corporationId, ParameterType.UrlSegment);
@@ -73,7 +75,8 @@ namespace EntrepreneurEsiApi.Api
             return response;
         }
 
-        public EsiPaginatedResponse<IndustryMiningObserverMiningDone> GetMiningLedgerCorp(int corporationId, long observerId, string token)
+        public EsiPaginatedResponse<IndustryMiningObserverMiningDone> GetMiningLedgerCorp(int corporationId,
+            long observerId, string token)
         {
             var request = new RestRequest(IndustryMiningObserverMiningDone.Endpoint);
             request.AddParameter("corporation_id", corporationId, ParameterType.UrlSegment);
@@ -86,6 +89,7 @@ namespace EntrepreneurEsiApi.Api
                 r.OwnerID = corporationId;
                 r.ObserverID = observerId;
             }
+
             return response;
         }
 
@@ -99,6 +103,19 @@ namespace EntrepreneurEsiApi.Api
 
             foreach (var r in response.Items) {
                 r.OwnerID = corporationId;
+            }
+
+            return response;
+        }
+
+        public EsiPaginatedResponse<IndustryMiningLedgerResponse> GetMiningLedger(int characterId, string token)
+        {
+            var request = new RestRequest(IndustryMiningLedgerResponse.Endpoint);
+            request.AddParameter("character_id", characterId, ParameterType.UrlSegment);
+            request.AddParameter("token", token);
+            var response = ApiClient.ExecutePaginated<IndustryMiningLedgerResponse>(request);
+            foreach (var r in response.Items) {
+                r.CharacterID = characterId;
             }
             return response;
         }

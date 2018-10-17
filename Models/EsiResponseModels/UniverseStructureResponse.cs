@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 
-namespace EntrepreneurEsiApi.Models
+namespace EntrepreneurCommon.Models
 {
     public class StructurePosition
     {

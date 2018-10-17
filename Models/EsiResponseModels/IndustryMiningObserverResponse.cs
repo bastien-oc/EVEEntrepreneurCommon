@@ -3,7 +3,7 @@ using J = Newtonsoft.Json.JsonPropertyAttribute;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace EntrepreneurEsiApi.Models.Esi
+namespace EntrepreneurCommon.Models.Esi
 {
     /// <summary>
     /// Paginated list of all entities capable of observing and recording mining for a corporation

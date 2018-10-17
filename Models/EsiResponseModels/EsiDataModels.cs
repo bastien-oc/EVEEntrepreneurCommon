@@ -8,7 +8,7 @@ using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
-namespace EntrepreneurEsiApi.Models.Esi
+namespace EntrepreneurCommon.Models.Esi
 {
 
     //public abstract class EsiDataModel
@@ -92,18 +92,18 @@ namespace EntrepreneurEsiApi.Models.Esi
     {
         [JsonIgnore] public static readonly string Endpoint = "/v3/characters/{character_id}/search/";
 
-        [J("agent")]            public List<long> Agent { get; set; }
-        [J("alliance")]         public List<long> Alliance { get; set; }
-        [J("character")]        public List<long> Character { get; set; }
-        [J("constellation")]    public List<long> Constellation { get; set; }
-        [J("corporation")]      public List<long> Corporation { get; set; }
-        [J("faction")]          public List<long> Faction { get; set; }
-        [J("inventorytype")]    public List<long> InventoryType { get; set; }
-        [J("region")]           public List<long> Region { get; set; }
-        [J("solarsystem")]      public List<long> SolarSystem { get; set; }
-        [J("station")]          public List<long> Station { get; set; }
-        [J("structure")]        public List<long> Structure { get; set; }
-        [J("wormhole")]         public List<long> Wormhole { get; set; }
+        [J("agent")]            public List<int> Agent { get; set; }
+        [J("alliance")]         public List<int> Alliance { get; set; }
+        [J("character")]        public List<int> Character { get; set; }
+        [J("constellation")]    public List<int> Constellation { get; set; }
+        [J("corporation")]      public List<int> Corporation { get; set; }
+        [J("faction")]          public List<int> Faction { get; set; }
+        [J("inventorytype")]    public List<int> InventoryType { get; set; }
+        [J("region")]           public List<int> Region { get; set; }
+        [J("solarsystem")]      public List<int> SolarSystem { get; set; }
+        [J("station")]          public List<int> Station { get; set; }
+        [J("structure")]        public List<int> Structure { get; set; }
+        [J("wormhole")]         public List<int> Wormhole { get; set; }
     }
 
     public class IndustryFacilities

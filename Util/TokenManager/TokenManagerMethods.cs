@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntrepreneurEsiApi.Authentication;
+using EntrepreneurCommon.Authentication;
 
-namespace EntrepreneurEsiApi.Util
+namespace EntrepreneurCommon.Util
 {
     public partial class TokenManager
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntrepreneurEsiApi.Models.DatabaseModels
+namespace EntrepreneurCommon.Models.DatabaseModels
 {
     public class DbMarketEntityOrder
     {

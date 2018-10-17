@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntrepreneurEsiApi.Util.Entities
+namespace EntrepreneurCommon.Util.Entities
 {
     public class EveCharacter:EveEntity
     {
