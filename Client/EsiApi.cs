@@ -9,7 +9,7 @@ using RestSharp;
 
 namespace EntrepreneurCommon.Api
 {
-    public partial class EsiApiClient
+    public partial class EsiApiClient : RestSharp.RestClient
     {
         public RestClient RestClient { get; set; }
         //public EsiAuthClient AuthClient { get; }
@@ -231,7 +231,7 @@ namespace EntrepreneurCommon.Api
 
     }
 
-    public partial class EsiApiClient
+    public partial class EsiApiClient : RestSharp.RestClient
     {
 
 
