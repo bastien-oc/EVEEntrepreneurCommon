@@ -11,12 +11,14 @@ namespace EntrepreneurCommon.Api
 {
     public partial class EsiApiClient
     {
+        public const string RestClientURL = "https://esi.tech.ccp.is";
+        
         public RestClient RestClient { get; set; }
         //public EsiAuthClient AuthClient { get; }
 
         public EsiApiClient()
         {
-            RestClient = new RestClient("https://esi.tech.ccp.is");
+            RestClient = new RestClient(RestClientURL);
         }
 
         public EsiApiClient( string basePath ) //, string clientId, string secretKey, string callbackUrl )
