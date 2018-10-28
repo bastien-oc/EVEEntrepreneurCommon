@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using EntrepreneurCommon.Authentication;
+using EntrepreneurCommon.Common;
 
 namespace EntrepreneurCommon.Models.Esi
 {
@@ -10,6 +12,7 @@ namespace EntrepreneurCommon.Models.Esi
     /// Paginated record of all mining done by a character for the past 30 days
     /// Endpoint: /characters/{character_id}/mining/
     /// </summary>
+    [EsiEndpoint("/v1/characters/{character_id}/mining/", true, new []{EsiCharacterScopes.IndustryMiningRead})]
     [Table("character_mining")]
     public partial class IndustryMiningLedgerResponse : IEsiEndpoint
     {
