@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Linq;
 using Newtonsoft.Json;
-using Nito.AsyncEx;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
 
 namespace EntrepreneurCommon.Models.Esi
 {
@@ -14,15 +11,16 @@ namespace EntrepreneurCommon.Models.Esi
     /// Endpoint: /characters/{character_id}/mining/
     /// </summary>
     [Table("character_mining")]
-    public partial class IndustryMiningLedgerResponse
+    public partial class IndustryMiningLedgerResponse : IEsiEndpoint
     {
-        [JsonIgnore] public static readonly string Endpoint = "/v1/characters/{character_id}/mining/";
+        [JsonIgnore] [Obsolete] public static readonly string Endpoint = "/v1/characters/{character_id}/mining/";
 
         /// <summary>
         /// Identifies the owner of the entry when stored alongside other data. App and Database use only, not part of API.
         /// </summary>
         [JsonIgnore]
-        [Column("character_id")] [Key]
+        [Column("character_id")]
+        [Key]
         public long CharacterID { get; set; }
 
         /// <summary>
@@ -56,12 +54,12 @@ namespace EntrepreneurCommon.Models.Esi
         /// <summary>
         /// App use only. Returns the name of the material mined.
         /// </summary>
-        [J("type_name")] public String TypeName { get; set; }
+        [J("type_name")]
+        public String TypeName { get; set; }
+
         /// <summary>
         /// App use only. Returns the name of the solar system.
         /// </summary>
         public String SolarSystemName { get; set; }
     }
-
-
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EntrepreneurCommon.Models.ThirdPartyResponseModels
+﻿namespace EntrepreneurCommon.Models.ThirdPartyResponseModels
 {
     using J = Newtonsoft.Json.JsonPropertyAttribute;
 

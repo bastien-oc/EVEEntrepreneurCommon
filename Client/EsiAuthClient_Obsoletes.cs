@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using EntrepreneurCommon.Authentication;
 using Newtonsoft.Json;
-
+#pragma warning disable
 namespace EntrepreneurCommon.Client
 {
     public partial class EsiAuthClient
@@ -166,3 +166,4 @@ namespace EntrepreneurCommon.Client
 
     }
 }
+#pragma warning enable

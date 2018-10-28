@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-using EntrepreneurCommon.Authentication;
-using EntrepreneurCommon.Client;
+﻿using EntrepreneurCommon.Client;
 
 namespace EntrepreneurCommon.Authentication {
     /// <summary>
