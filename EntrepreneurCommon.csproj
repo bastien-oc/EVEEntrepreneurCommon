@@ -96,6 +96,7 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
@@ -122,6 +123,7 @@
     <Compile Include="Authentication\EsiTokenResponse.cs" />
     <Compile Include="Authentication\EsiTokenVerification.cs" />
     <Compile Include="Authentication\IEsiTokenContainer.cs" />
+    <Compile Include="Client\Cache.cs" />
     <Compile Include="Client\EsiApi.cs" />
     <Compile Include="Api\SystemModels\EsiErrors.cs" />
     <Compile Include="Api\SystemModels\HttpMessageError.cs" />
@@ -130,7 +132,11 @@
     <Compile Include="Client\EsiAuthClient.cs" />
     <Compile Include="Authentication\EsiTokenInfo_Methods.cs" />
     <Compile Include="Client\EsiAuthClient_Obsoletes.cs" />
+    <Compile Include="Client\EsiEndpoints.cs" />
     <Compile Include="Common\DbContextFactory.cs" />
+    <Compile Include="Common\EsiEndpointAttribute.cs" />
+    <Compile Include="Common\EsiRecordAnnotationAttribute.cs" />
+    <Compile Include="Common\IAnnotatedRecord.cs" />
     <Compile Include="DbLayer\DbDataContext.cs" />
     <Compile Include="DbLayer\DbPersistenceContext.cs" />
     <Compile Include="Models\DatabaseModels\DbCustomPrice.cs" />
@@ -150,6 +156,7 @@
     <Compile Include="Models\EsiResponseModels\CorporationPublicInformation.cs" />
     <Compile Include="Models\EsiResponseModels\EntityMarketOrders.cs" />
     <Compile Include="Models\EsiResponseModels\EsiDataModels.cs" />
+    <Compile Include="Models\EsiResponseModels\IEsiEndpoint.cs" />
     <Compile Include="Models\EsiResponseModels\IndustryCharacterJobResponse.cs" />
     <Compile Include="Models\EsiResponseModels\IndustryMiningExtractionResponse.cs" />
     <Compile Include="Models\EsiResponseModels\IndustryMiningLedgerResponse.cs" />

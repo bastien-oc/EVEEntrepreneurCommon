@@ -1,8 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics;
-using System.Threading.Tasks;
 using EntrepreneurCommon.Client;
 using Newtonsoft.Json;
 

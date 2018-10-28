@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web;
-using System.Web.UI.WebControls;
 using EntrepreneurCommon.Authentication;
 using Newtonsoft.Json;
 using RestSharp;
@@ -42,7 +37,9 @@ namespace EntrepreneurCommon.Client
             this.SecretKey = secretKey;
             this.CallbackUrl = callbackUrl;
 
+#pragma warning disable 612
             _client = new HttpClient();
+#pragma warning restore 612
             restClient = new RestClient(BaseUrl);
         }
 

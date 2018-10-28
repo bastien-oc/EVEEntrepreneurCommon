@@ -173,8 +173,9 @@ namespace EntrepreneurCommon.Api
             itemCollection.AddRange(JsonConvert.DeserializeObject<List<T>>(response.Content));
             responseCollection.Add(response);
 
-            string _pages;
-            int _xpages = 1;
+            // ToDo: Revise commented out segment below.
+            // string _pages;
+            // int _xpages = 1;
 
             if (response.Headers.Any(x => x.Name == "X-Pages")) {
                 int pages = Convert.ToInt32(

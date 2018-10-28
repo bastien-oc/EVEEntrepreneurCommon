@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EntrepreneurCommon.Models.DatabaseModels;
 using EntrepreneurCommon.Models.EsiResponseModels;
-using EntrepreneurCommon.Models.DatabaseModels;
 using EntrepreneurCommon.Models.Esi;
 
 namespace EntrepreneurCommon.DbLayer

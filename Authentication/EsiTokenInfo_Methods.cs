@@ -4,7 +4,7 @@ using EntrepreneurCommon.Client;
 using EntrepreneurCommon.Models.Esi;
 using EntrepreneurCommon.Util;
 using RestSharp;
-
+#pragma warning disable
 namespace EntrepreneurCommon.Authentication
 {
     // TODO Null checks for RefreshToken - happens when no scopes are selected, i.e: used for authentication only.
@@ -137,3 +137,5 @@ namespace EntrepreneurCommon.Authentication
         }
     }
 }
+
+#pragma warning enable

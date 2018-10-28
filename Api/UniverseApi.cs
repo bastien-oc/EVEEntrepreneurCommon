@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EntrepreneurCommon.Api;
-using EntrepreneurCommon.Authentication;
 using EntrepreneurCommon.Models;
 using EntrepreneurCommon.Models.Esi;
 using RestSharp;

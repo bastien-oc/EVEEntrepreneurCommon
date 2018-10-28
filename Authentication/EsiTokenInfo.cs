@@ -1,5 +1,4 @@
 ﻿using System;
-using EntrepreneurCommon.Authentication;
 using EntrepreneurCommon.Client;
 using EntrepreneurCommon.Models.Esi;
 using Newtonsoft.Json;

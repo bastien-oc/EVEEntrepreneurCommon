@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using EntrepreneurCommon.Common;
 using Newtonsoft.Json;
-using Nito.AsyncEx;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 
 namespace EntrepreneurCommon.Models.Esi
@@ -144,19 +144,17 @@ namespace EntrepreneurCommon.Models.Esi
     }
 
     [Table("char_wallet_journal")]
-    public class WalletJournalModelCharV4
+    [EsiEndpoint("/v4/characters/{character_id}/wallet/journal/", true)]
+    public class WalletJournalModelCharV4 : IAnnotatedRecord
     {
-        [JsonIgnore] public static readonly String Endpoint = "/v4/characters/{character_id}/wallet/journal/";
-        [JsonIgnore]
-        [Column("wallet_owner_id", Order = 0), Key, Index("UNIQUE", IsUnique = true, Order = 0)]
+        [JsonIgnore, NotMapped] public static readonly String Endpoint = "/v4/characters/{character_id}/wallet/journal/";
+        [Column("wallet_owner_id", Order = 0), Key, Index("UNIQUE", IsUnique = true, Order = 0), EsiRecordAnnotation("character_id")]
         public int WalletOwnerID { get; set; }
 
-        [JsonIgnore]
-        [Column("wallet_owner_name")]
+        [JsonIgnore, Column("wallet_owner_name")]
         public string WalletOwnerName { get; set; }
 
-        [J("amount")]
-        [Column("amount")]
+        [J("amount"), Column("amount")]
         public double Amount { get; set; }
 
         public double Balance { get; set; }

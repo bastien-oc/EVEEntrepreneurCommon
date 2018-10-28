@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using J = Newtonsoft.Json.JsonPropertyAttribute;
+﻿using J = Newtonsoft.Json.JsonPropertyAttribute;
 
 namespace EntrepreneurCommon.Api.SystemModels
 {
