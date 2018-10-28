@@ -9,10 +9,11 @@ namespace EntrepreneurCommon.Common
 {
     public class EsiEndpointAttribute : Attribute
     {
-        public EsiEndpointAttribute(string endpoint, bool isPaginated = false)
+        public EsiEndpointAttribute(string endpoint, bool isPaginated = false, string[] scopes = null)
         {
             Endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
             IsPaginated = isPaginated;
+            ScopesRequired = scopes ?? default;
         }
 
         public string Endpoint { get; set; }
