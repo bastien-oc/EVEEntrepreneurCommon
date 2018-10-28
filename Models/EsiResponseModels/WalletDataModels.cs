@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using EntrepreneurCommon.Authentication;
 using EntrepreneurCommon.Common;
 using Newtonsoft.Json;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
@@ -144,8 +145,8 @@ namespace EntrepreneurCommon.Models.Esi
     }
 
     [Table("char_wallet_journal")]
-    [EsiEndpoint("/v4/characters/{character_id}/wallet/journal/", true)]
-    public class WalletJournalModelCharV4 : IAnnotatedRecord
+    [EsiEndpoint("/v4/characters/{character_id}/wallet/journal/", true, ScopesRequired = new []{"esi-wallet.read_character_wallet.v1"} )]
+    public class WalletJournalModelCharV4 : IEsiAnnotatedRecord
     {
         [JsonIgnore, NotMapped] public static readonly String Endpoint = "/v4/characters/{character_id}/wallet/journal/";
         [Column("wallet_owner_id", Order = 0), Key, Index("UNIQUE", IsUnique = true, Order = 0), EsiRecordAnnotation("character_id")]

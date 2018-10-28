@@ -17,6 +17,7 @@ namespace EntrepreneurCommon.Common
 
         public string Endpoint { get; set; }
         public Boolean IsPaginated { get; set; }
+        public string[] ScopesRequired { get; set; }
 
         public static string GetEndpointUrl(object data)
         {
