@@ -9,7 +9,7 @@ using RestSharp;
 
 namespace EntrepreneurCommon.Api
 {
-    public partial class EsiApiClient
+    public partial class EsiApiClient : RestSharp.RestClient
     {
         public const string RestClientURL = "https://esi.tech.ccp.is";
         
@@ -233,7 +233,7 @@ namespace EntrepreneurCommon.Api
 
     }
 
-    public partial class EsiApiClient
+    public partial class EsiApiClient : RestSharp.RestClient
     {
 
 
