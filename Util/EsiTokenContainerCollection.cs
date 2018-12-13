@@ -14,8 +14,10 @@ namespace EntrepreneurCommon.Util
         {
             Items = new List<IEsiTokenContainer>();
         }
-        public int Count => Items.Count;
+
+        public int  Count      => Items.Count;
         public bool IsReadOnly => false;
+
         /// <summary>
         /// Adds an EsiTokenContainer to a collection if another token doesn't duplicate the scopes for the given character.
         /// </summary>
@@ -26,8 +28,9 @@ namespace EntrepreneurCommon.Util
                 Items.Add(item);
             else
                 throw new SufficientTokenExistsException(
-                    "A token with identical character ID and scopes already exists. No need to add another.");
+                                                         "A token with identical character ID and scopes already exists. No need to add another.");
         }
+
         /// <summary>
         /// Returns true if another token with matching CharacterId and Scopes is found in the collection.
         /// </summary>
@@ -35,23 +38,25 @@ namespace EntrepreneurCommon.Util
         /// <returns></returns>
         public bool ContainsComparable(IEsiTokenContainer item)
         {
-            if (!Items.Any(a => a.CharacterId == item.CharacterId && a.Scopes == item.Scopes))
-                return true;
+            if (!Items.Any(a => a.CharacterId == item.CharacterId && a.Scopes == item.Scopes)) return true;
             return false;
         }
+
         public void Add(IEsiTokenContainer item)
         {
             Items.Add(item);
         }
+
         public void Clear()
         {
             Items.Clear();
         }
+
         public bool Contains(IEsiTokenContainer item)
         {
             return Items.Contains(item);
-            
         }
+
         /// <summary>
         /// TODO Implement.
         /// </summary>
@@ -59,10 +64,15 @@ namespace EntrepreneurCommon.Util
         /// <param name="arrayIndex"></param>
         /// <exception cref="NotImplementedException"></exception>
         public void CopyTo(IEsiTokenContainer[] array,
-            int arrayIndex) => throw new NotImplementedException();
-        public IEnumerator<IEsiTokenContainer> GetEnumerator() => ((IEnumerable<EsiTokenContainer>) Items).GetEnumerator();
+                           int                  arrayIndex) => throw new NotImplementedException();
+
+        public IEnumerator<IEsiTokenContainer> GetEnumerator()
+            => ((IEnumerable<EsiTokenContainer>) Items).GetEnumerator();
+
         public bool Remove(IEsiTokenContainer item) => Items.Remove(item);
-        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<EsiTokenContainer>)Items).GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator()
+            => ((IEnumerable<EsiTokenContainer>) Items).GetEnumerator();
     }
 
     internal class SufficientTokenExistsException : Exception

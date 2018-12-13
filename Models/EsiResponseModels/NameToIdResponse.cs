@@ -1,32 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using EntrepreneurCommon.Common;
+using EntrepreneurCommon.Common.Attributes;
 using Newtonsoft.Json;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 
 namespace EntrepreneurCommon.Models.EsiResponseModels
 {
-    public class NameToIdResponse
+    [EsiEndpoint("/v1/universe/ids/")]
+    public class NameToIdResponse : IEsiResponseModel
     {
-        [JsonIgnore] public static readonly string Endpoint = "/v1/universe/ids/";
+        [J("agent")]
+        public List<IdName> Agents { get; set; }
 
-        [J("agent")] public List<IdName> Agents { get; set; }
-        [J("alliances")] public List<IdName> Alliances { get; set; }
-        [J("characters")] public List<IdName> Characters { get; set; }
-        [J("constellations")] public List<IdName> Constellations { get; set; }
-        [J("corporations")] public List<IdName> Corporations { get; set; }
-        [J("factions")] public List<IdName> Factions { get; set; }
-        [J("inventorytypes")] public List<IdName> InventoryTypes { get; set; }
-        [J("regions")] public List<IdName> Regions { get; set; }
-        [J("solarsystems")] public List<IdName> SolarSystems { get; set; }
-        [J("stations")] public List<IdName> Stations { get; set; }
+        [J("alliances")]
+        public List<IdName> Alliances { get; set; }
+
+        [J("characters")]
+        public List<IdName> Characters { get; set; }
+
+        [J("constellations")]
+        public List<IdName> Constellations { get; set; }
+
+        [J("corporations")]
+        public List<IdName> Corporations { get; set; }
+
+        [J("factions")]
+        public List<IdName> Factions { get; set; }
+
+        [J("inventorytypes")]
+        public List<IdName> InventoryTypes { get; set; }
+
+        [J("regions")]
+        public List<IdName> Regions { get; set; }
+
+        [J("solarsystems")]
+        public List<IdName> SolarSystems { get; set; }
+
+        [J("stations")]
+        public List<IdName> Stations { get; set; }
     }
 
     public class IdName
     {
-        public Int32 Id { get; set; }
-        public String Name { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
-
 }
-
-

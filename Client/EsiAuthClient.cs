@@ -4,8 +4,12 @@ using System.Net.Http;
 using System.Text;
 using System.Web;
 using EntrepreneurCommon.Authentication;
+using EntrepreneurCommon.Common;
 using Newtonsoft.Json;
 using RestSharp;
+using RestSharp.Deserializers;
+using RestSharp.Serializers;
+using JsonSerializer = EntrepreneurCommon.Common.JsonSerializer;
 
 namespace EntrepreneurCommon.Client
 {
@@ -13,10 +17,10 @@ namespace EntrepreneurCommon.Client
     {
         private readonly RestClient restClient;
 
-        private readonly string pathAuthorize = "oauth/authorize";
-        private readonly string pathToken = "oauth/token";
-        private readonly string pathVerify = "oauth/verify";
-        private readonly string pathRevoke = "oauth/revoke";
+        private const string PathAuthorize = "oauth/authorize";
+        private const string PathToken = "oauth/token";
+        private const string PathVerify = "oauth/verify";
+        private const string PathRevoke = "oauth/revoke";
 
         public string ClientId { get; }
         public string CallbackUrl { get; }
@@ -27,6 +31,8 @@ namespace EntrepreneurCommon.Client
         public string BaseUrl { get; set; } = "https://login.eveonline.com";
         public string HostName { get; set; } = "login.eveonline.com";
         public string UserAgent { get; set; }
+
+        private JsonSerializer serializer = new JsonSerializer();
     }
 
     public partial class EsiAuthClient
@@ -38,9 +44,18 @@ namespace EntrepreneurCommon.Client
             this.CallbackUrl = callbackUrl;
 
 #pragma warning disable 612
-            _client = new HttpClient();
+            //_client = new HttpClient();
 #pragma warning restore 612
             restClient = new RestClient(BaseUrl);
+
+            restClient.AddHandler(serializer);
+            restClient.AddHandler("application/json", serializer);
+            restClient.AddHandler("text/json", serializer);
+            restClient.AddHandler("text/x-json", serializer);
+            restClient.AddHandler("text/javascript", serializer);
+            restClient.AddHandler("*+json", serializer);
+
+
         }
 
         public string GetRedirectUrl(string scopes, string state = null)
@@ -54,18 +69,18 @@ namespace EntrepreneurCommon.Client
                 _q["state"] = state;
 
             var builder = new UriBuilder(BaseUrl) {
-                Path = pathAuthorize,
+                Path = PathAuthorize,
                 Query = _q.ToString()
             };
 
             return builder.ToString();
         }
 
-        public EsiTokenContainer GetTokenComposite(string tokenCodeStr, TokenAuthenticationType authType)
+        public IEsiTokenContainer GetTokenComposite(string tokenCodeStr, TokenAuthenticationType authType)
         {
             var tokenResponse = RequestAccessToken(tokenCodeStr, authType);
             var verification = RequestTokenVerification(tokenResponse.AccessToken);
-            return new EsiTokenContainer(tokenResponse, verification, this);
+            return new EsiTokenContainer(tokenResponse, verification);
         }
 
         public IEsiTokenResponse RequestAccessToken(string tokenCode, TokenAuthenticationType tokenType)
@@ -87,7 +102,7 @@ namespace EntrepreneurCommon.Client
                     break;
             }
 
-            var request = new RestRequest(pathToken, Method.POST, DataFormat.Json);
+            var request = new RestRequest(PathToken, Method.POST, DataFormat.Json);
             request.AddHeader("Authorization", $"Basic {ClientAuthorization}");
             request.AddHeader("Host", HostName);
             request.AddHeader("User-Agent", UserAgent);
@@ -109,7 +124,7 @@ namespace EntrepreneurCommon.Client
         /// <returns></returns>
         public IEsiTokenVerification RequestTokenVerification(string accessToken)
         {
-            var request = new RestRequest(pathVerify);
+            var request = new RestRequest(PathVerify);
             request.AddHeader("User-Agent", UserAgent);
             request.AddHeader("Authorization", $"Bearer {accessToken}");
             request.AddHeader("Host", HostName);
@@ -128,7 +143,7 @@ namespace EntrepreneurCommon.Client
             //    Method = HttpMethod.Post
             //};
 
-            var request = new RestRequest(pathRevoke, Method.POST);
+            var request = new RestRequest(PathRevoke, Method.POST);
             request.AddHeader("User-Agent", UserAgent);
             request.AddHeader("Authorization", $"Basic {ClientAuthorization}");
             request.AddHeader("Content-type", "application/json");
@@ -156,7 +171,7 @@ namespace EntrepreneurCommon.Client
 
             if (!response.IsSuccessful) {
                 throw new Exception(
-                    $"[{pathRevoke}] Error has occured while revoking a token {token}: {response.StatusCode} - {response.Content}<br/>{body}");
+                    $"[{PathRevoke}] Error has occured while revoking a token {token}: {response.StatusCode} - {response.Content}<br/>{body}");
             }
 
             return true;
@@ -169,7 +184,7 @@ namespace EntrepreneurCommon.Client
             }
 
             var now = DateTime.UtcNow;
-            var exp = DateTime.Parse(token.ExpiresOn);
+            var exp = token.ExpiresOn;
 
             if (exp > now) // Expiry date is in the future
                 return EnumNeedsRefreshing.No;
@@ -190,26 +205,30 @@ namespace EntrepreneurCommon.Client
             return token.AccessToken;
         }
 
-        public void RefreshToken(IEsiTokenContainer token)
+        public IEsiTokenContainer RefreshToken(IEsiTokenContainer token)
         {
             if (TokenNeedsRefreshing(token) != EnumNeedsRefreshing.Yes)
-                return;
+                return token;
 
             var access = RequestAccessToken(token.RefreshToken, TokenAuthenticationType.RefreshToken);
             var verify = RequestTokenVerification(access.AccessToken);
 
             AssignTokenResponse(token, access);
             AssignTokenVerification(token, verify);
+
+            return token;
         }
 
         public bool CheckScope(IEsiTokenVerification token, string scope)
         {
+            if (string.IsNullOrEmpty(scope)) return true;
             if (token.Scopes.ToLower().Contains(scope.ToLower())) return true;
             return false;
         }
 
         public bool CheckScope(IEsiTokenVerification token, params string[] scope)
         {
+            if (scope == null) return true;
             // Set to false if ANY scope listed doesn't apply to the token.
             foreach (var s in scope) {
                 if (!token.Scopes.Contains(s))

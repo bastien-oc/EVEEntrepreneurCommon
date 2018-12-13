@@ -1,54 +1,59 @@
 ﻿using System;
+using EntrepreneurCommon.Client;
+using EntrepreneurCommon.Common;
+using EntrepreneurCommon.Common.Attributes;
+using EntrepreneurCommon.ExtensionMethods;
+using EntrepreneurCommon.Helpers;
 using EntrepreneurCommon.Models.EsiResponseModels;
-using EntrepreneurCommon.Models.Esi;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace EntrepreneurCommon.Api
 {
     public partial class CharacterApi : CommonApi
     {
-        public CharacterApi( EsiApiClient apiClient ) : base(apiClient)
+        public CharacterApi(IEsiRestClient client) : base(client) { }
+
+        public IRestResponse<CharacterFatigueModel> GetCharacterFatigue(Int32 characterId, string token)
         {
+            var request = RequestHelper.GetRestRequest<CharacterFatigueModel>(token)
+                                       .SetCharacterId(characterId);
+            return Client.Execute<CharacterFatigueModel>(request);
         }
 
-        public IRestResponse<CharacterFatigueModel> GetCharacterFatigue( Int32 characterId, string token )
+        public IRestResponse<CharacterOnlineModel> GetCharacterOnlineStatus(Int32 characterId, string token)
         {
-            var request = new RestRequest(CharacterFatigueModel.EndpointVersioned, Method.GET);
-            request.AddUrlSegment("character_id", characterId);
-            request.AddHeader("Authorization", $"Bearer {token}");
-            var response = ApiClient.Execute<CharacterFatigueModel>(request);
-            return response;
+            var request = RequestHelper.GetRestRequest<CharacterOnlineModel>(token).SetCharacterId(characterId);
+            return Client.Execute<CharacterOnlineModel>(request);
         }
 
-        public IRestResponse<LocationOnline> GetCharacterOnlineStatus(Int32 characterId, string token)
+        public IRestResponse<CharacterShipModel> GetCharacterShip(Int32 characterId, string token)
         {
-            var request = new RestRequest(LocationOnline.Endpoint, Method.GET);
-            request.AddUrlSegment("character_id", characterId);
-            request.AddParameter("token", token);
-            return ApiClient.Execute<LocationOnline>(request);
+            var request = RequestHelper.GetRestRequest<CharacterShipModel>(token)
+                                       .AddParameter("character_id", characterId, ParameterType.UrlSegment);
+            return Client.Execute<CharacterShipModel>(request);
         }
 
-        public IRestResponse<LocationShip> GetCharacterShip( Int32 characterId, string token )
+        public IRestResponse<CharacterLocationModel> GetCharacterLocation(Int32 characterId, string token)
         {
-            var request = new RestRequest(LocationShip.Endpoint, Method.GET);
-            request.AddUrlSegment("character_id", characterId);
-            request.AddParameter("token", token);
-            return ApiClient.Execute<LocationShip>(request);
-        }
-
-        public IRestResponse<LocationLocation> GetCharacterLocation( Int32 characterId, string token )
-        {
-            var request = new RestRequest(LocationLocation.Endpoint, Method.GET);
-            request.AddUrlSegment("character_id", characterId);
-            request.AddParameter("token", token);
-            return ApiClient.Execute<LocationLocation>(request);
+            var request = RequestHelper.GetRestRequest<CharacterLocationModel>(token)
+                                       .SetCharacterId(characterId);
+            return Client.Execute<CharacterLocationModel>(request);
         }
 
         public IRestResponse<CharacterPublicInformation> GetCharacterPublicInformation(Int32 characterId)
         {
-            var request = new RestRequest(CharacterPublicInformation.Endpoint);
-            request.AddUrlSegment("character_id", characterId);
-            return ApiClient.Execute<CharacterPublicInformation>(request);
+            var request  = RequestHelper.GetRestRequest<CharacterPublicInformation>().SetCharacterId(characterId);
+            var response = Client.Execute<CharacterPublicInformation>(request);
+            response.Data.AssignAnnotationFields(request);
+            return response;
+        }
+
+        public IRestResponse<CharacterRolesModel> GetCharacterRoles(Int32 characterId, string token)
+        {
+            var request = RequestHelper.GetRestRequest<CharacterRolesModel>(token)
+                                       .SetCharacterId(characterId);
+            return Client.Execute<CharacterRolesModel>(request);
         }
     }
 }

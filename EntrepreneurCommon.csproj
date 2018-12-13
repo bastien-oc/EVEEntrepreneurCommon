@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EntrepreneurCommon</RootNamespace>
     <AssemblyName>EntrepreneurCommon</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +35,9 @@
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Tinkering Projects\ASP.NET\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\EVE Enterpreneur\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -42,6 +46,21 @@
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="LazyCache, Version=0.7.1.44, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Tinkering Projects\ASP.NET\packages\LazyCache.0.7.1.44\lib\net45\LazyCache.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Tinkering Projects\ASP.NET\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Tinkering Projects\ASP.NET\packages\Microsoft.IdentityModel.JsonWebTokens.5.3.0\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Tinkering Projects\ASP.NET\packages\Microsoft.IdentityModel.Logging.5.3.0\lib\net461\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Tinkering Projects\ASP.NET\packages\Microsoft.IdentityModel.Tokens.5.3.0\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\EVE Enterpreneur\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
@@ -52,11 +71,11 @@
     <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\EVE Enterpreneur\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=8.0.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.8.0.12\lib\net452\MySql.Data.dll</HintPath>
+    <Reference Include="MySql.Data, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Tinkering Projects\ASP.NET\packages\MySql.Data.8.0.13\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="mysql.data.entity.EF6, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.Entities.6.8.3.0\lib\net45\mysql.data.entity.EF6.dll</HintPath>
+    <Reference Include="MySql.Data.EntityFramework, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Tinkering Projects\ASP.NET\packages\MySql.Data.EntityFramework.8.0.13\lib\net452\MySql.Data.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\EVE Enterpreneur\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -91,6 +110,10 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Tinkering Projects\ASP.NET\packages\System.IdentityModel.Tokens.Jwt.5.3.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Management" />
     <Reference Include="System.Net" />
@@ -100,6 +123,9 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Tinkering Projects\ASP.NET\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -116,28 +142,60 @@
     <Compile Include="Api\MarketApi.cs" />
     <Compile Include="Api\UniverseApi.cs" />
     <Compile Include="Api\WalletApi.cs" />
-    <Compile Include="Authentication\AuthEnums.cs" />
-    <Compile Include="Authentication\EsiScopesHelper.cs" />
-    <Compile Include="Authentication\EsiTokenContainer.cs" />
-    <Compile Include="Authentication\EsiTokenInfo.cs" />
-    <Compile Include="Authentication\EsiTokenResponse.cs" />
-    <Compile Include="Authentication\EsiTokenVerification.cs" />
-    <Compile Include="Authentication\IEsiTokenContainer.cs" />
-    <Compile Include="Client\Cache.cs" />
-    <Compile Include="Client\EsiApi.cs" />
-    <Compile Include="Api\SystemModels\EsiErrors.cs" />
-    <Compile Include="Api\SystemModels\HttpMessageError.cs" />
-    <Compile Include="Api\SystemModels\EndpointAttribute.cs" />
-    <Compile Include="Api\SystemModels\EsiEndpoint.cs" />
+    <Compile Include="Common\ConstStrings.cs" />
+    <Compile Include="DbLayer\DatabaseEf.cs" />
+    <Compile Include="DbLayer\DbConnectionType.cs" />
+    <Compile Include="DbLayer\IDatabaseProvider.cs" />
+    <Compile Include="DbLayer\ITokenStorageProvider.cs" />
+    <Compile Include="DbLayer\JsonTokenStorageProvider.cs" />
+    <Compile Include="DbLayer\MyDbConfiguration.cs" />
+    <Compile Include="Models\AuthEnums.cs" />
+    <Compile Include="Helpers\EsiScopesHelper.cs" />
+    <Compile Include="Models\AuthModels\EsiTokenContainer.cs" />
+    <Compile Include="Models\AuthModels\EsiTokenResponse.cs" />
+    <Compile Include="Models\AuthModels\EsiTokenVerification.cs" />
+    <Compile Include="Models\AuthModels\IEsiTokenContainer.cs" />
+    <Compile Include="Models\Central\UserEntity.cs" />
+    <Compile Include="Models\DatabaseModels\CharacterRolesDb.cs" />
+    <Compile Include="Models\DatabaseModels\CharacterWalletJournalDbModel.cs" />
+    <Compile Include="Models\DatabaseModels\CharacterWalletTransactionDbModel.cs" />
+    <Compile Include="Models\DatabaseModels\CorporationWalletJournalDbModel.cs" />
+    <Compile Include="Models\DatabaseModels\CorporationWalletTransactionDbModel.cs" />
+    <Compile Include="Models\DatabaseModels\DbCharacterAssetsLocationModel.cs" />
+    <Compile Include="Models\DatabaseModels\DbTokenWrapper.cs" />
+    <Compile Include="Models\DatabaseModels\IDbTokenWrapper.cs" />
+    <Compile Include="Models\DatabaseModels\IndustrySystemDto.cs" />
+    <Compile Include="Models\DataSource.cs" />
+    <Compile Include="Client\EsiClient.cs" />
+    <Compile Include="Models\EsiResponse.cs" />
+    <Compile Include="Models\EsiResponseModels\AlliancePublicInformationModel.cs" />
+    <Compile Include="Models\EsiResponseModels\CharacterRolesModel.cs" />
+    <Compile Include="Models\EsiResponseModels\IndustrySystemModel.cs" />
+    <Compile Include="Models\NameCache.cs" />
+    <Compile Include="Models\SystemModels\EsiErrorsHelper.cs" />
+    <Compile Include="Models\SystemModels\EsiException.cs" />
+    <Compile Include="Models\SystemModels\HttpMessageError.cs" />
+    <Compile Include="Models\SystemModels\EndpointAttribute.cs" />
+    <Compile Include="Models\SystemModels\EsiEndpointBase.cs" />
     <Compile Include="Client\EsiAuthClient.cs" />
-    <Compile Include="Authentication\EsiTokenInfo_Methods.cs" />
     <Compile Include="Client\EsiAuthClient_Obsoletes.cs" />
+    <Compile Include="Models\EsiConfiguration.cs" />
+    <Compile Include="Client\EsiRestClient.cs" />
+    <Compile Include="Client\IEsiRestClient.cs" />
     <Compile Include="Common\DbContextFactory.cs" />
-    <Compile Include="Common\EsiResponse.cs" />
-    <Compile Include="Common\EsiEndpointAttribute.cs" />
-    <Compile Include="Common\EsiRecordAnnotation.cs" />
-    <Compile Include="DbLayer\DbDataContext.cs" />
-    <Compile Include="DbLayer\DbPersistenceContext.cs" />
+    <Compile Include="Models\IEsiResponseModel.cs" />
+    <Compile Include="Common\Attributes\EsiEndpointAttribute.cs" />
+    <Compile Include="Common\Attributes\EsiRecordAnnotation.cs" />
+    <Compile Include="Common\ICacheService.cs" />
+    <Compile Include="Common\JsonSerializer.cs" />
+    <Compile Include="DbLayer\EsiFullDbContext.cs" />
+    <Compile Include="DbLayer\PersistentDataDbContext.cs" />
+    <Compile Include="ExtensionMethods\EsiEndpointExtensions.cs" />
+    <Compile Include="ExtensionMethods\EsiTokenContainerExtensions.cs" />
+    <Compile Include="ExtensionMethods\RestExtensions.cs" />
+    <Compile Include="ExtensionMethods\StringExtensions.cs" />
+    <Compile Include="Helpers\RequestHelper.cs" />
+    <Compile Include="Models\CacheTimer.cs" />
     <Compile Include="Models\DatabaseModels\DbCustomPrice.cs" />
     <Compile Include="Models\DatabaseModels\DbIndustryMiningExtraction.cs" />
     <Compile Include="Models\DatabaseModels\DbMarketCharacterOrder.cs" />
@@ -148,44 +206,58 @@
     <Compile Include="Models\DatabaseModels\DbMarketStatModel.cs" />
     <Compile Include="Models\DatabaseModels\DbStructureInfo.cs" />
     <Compile Include="Models\DatabaseModels\DbUniverseName.cs" />
-    <Compile Include="Models\EsiResponseModels\CharacterMarketOrders.cs" />
+    <Compile Include="Models\EsiResponseModels\AssetsLocationsPosition.cs" />
+    <Compile Include="Models\EsiResponseModels\CharacterFatigueModel.cs" />
+    <Compile Include="Models\EsiResponseModels\CharacterLocationModel.cs" />
+    <Compile Include="Models\EsiResponseModels\CharacterMarketOrdersModel.cs" />
+    <Compile Include="Models\EsiResponseModels\CharacterShipModel.cs" />
+    <Compile Include="Models\EsiResponseModels\CorporationMarketOrdersModel.cs" />
+    <Compile Include="Models\EsiResponseModels\CorporationAssetsLocationsModel .cs" />
+    <Compile Include="Models\EsiResponseModels\CharacterAssetsLocationsModel.cs" />
+    <Compile Include="Models\EsiResponseModels\Deprecated\AssetsName.cs" />
+    <Compile Include="Models\EsiResponseModels\CharacterAssetsModel.cs" />
+    <Compile Include="Models\EsiResponseModels\CharacterAssetsModel.LocationFlagEnum.cs" />
+    <Compile Include="Models\EsiResponseModels\CharacterAssetsModel.LocationTypeEnum.cs" />
+    <Compile Include="Models\EsiResponseModels\CharacterBlueprintsModel.cs" />
+    <Compile Include="Models\EsiResponseModels\Deprecated\CharacterMarketOrdersV1.cs" />
     <Compile Include="Models\EsiResponseModels\CharacterPublicInformation.cs" />
-    <Compile Include="Models\EsiResponseModels\CorporationMarketOrders.cs" />
+    <Compile Include="Models\EsiResponseModels\Deprecated\CorporationMarketOrdersV1.cs" />
     <Compile Include="Models\EsiResponseModels\CorporationPublicInformation.cs" />
-    <Compile Include="Models\EsiResponseModels\EntityMarketOrders.cs" />
+    <Compile Include="Models\EsiResponseModels\Deprecated\CWJExtraInfo.cs" />
+    <Compile Include="Models\EsiResponseModels\Deprecated\WalletCorporationJournalModelV2.cs" />
+    <Compile Include="Models\EsiResponseModels\Deprecated\WalletJournalModelCharV3.cs" />
+    <Compile Include="Models\EsiResponseModels\Deprecated\EntityMarketOrdersV1.cs" />
     <Compile Include="Models\EsiResponseModels\EsiDataModels.cs" />
-    <Compile Include="Models\EsiResponseModels\IndustryCharacterJobResponse.cs" />
-    <Compile Include="Models\EsiResponseModels\IndustryMiningExtractionResponse.cs" />
-    <Compile Include="Models\EsiResponseModels\IndustryMiningLedgerResponse.cs" />
-    <Compile Include="Models\EsiResponseModels\IndustryMiningObserverMiningDone.cs" />
-    <Compile Include="Models\EsiResponseModels\IndustryMiningObserverResponse.cs" />
-    <Compile Include="Models\EsiResponseModels\IndustrySystemResponse.cs" />
-    <Compile Include="Models\EsiResponseModels\LocationLocation.cs" />
-    <Compile Include="Models\EsiResponseModels\LocationOnline.cs" />
-    <Compile Include="Models\EsiResponseModels\LocationShip.cs" />
+    <Compile Include="Models\EsiResponseModels\CharacterIndustryJobsModel.cs" />
+    <Compile Include="Models\EsiResponseModels\IndustryFacilitiesModel.cs" />
+    <Compile Include="Models\EsiResponseModels\CorporationMiningExtractionModel.cs" />
+    <Compile Include="Models\EsiResponseModels\CharacterMiningLedgerModel.cs" />
+    <Compile Include="Models\EsiResponseModels\CorporationMiningObserverLedgerModel.cs" />
+    <Compile Include="Models\EsiResponseModels\CorporationMiningObserversModel.cs" />
+    <Compile Include="Models\EsiResponseModels\CharacterOnlineModel.cs" />
+    <Compile Include="Models\EsiResponseModels\CharacterWalletTransactionModel.cs" />
+    <Compile Include="Models\EsiResponseModels\CorporationWalletJournalModel.cs" />
+    <Compile Include="Models\EsiResponseModels\CorporationWalletTransactionModel.cs" />
+    <Compile Include="Models\EsiResponseModels\CharacterMarketOrdersHistoryModel.cs" />
+    <Compile Include="Models\EsiResponseModels\CorporationMarketOrdersHistory.cs" />
     <Compile Include="Models\EsiResponseModels\MarketsMarketGroupResponse.cs" />
     <Compile Include="Models\EsiResponseModels\MarketsPriceResponse.cs" />
     <Compile Include="Models\EsiResponseModels\MarketsRegionHistoryResponse.cs" />
     <Compile Include="Models\EsiResponseModels\MarketsStructureOrderResponse.cs" />
     <Compile Include="Models\EsiResponseModels\MarketsRegionOrderResponse.cs" />
-    <Compile Include="Models\EsiResponseModels\MarketTransactions.cs" />
+    <Compile Include="Models\EsiResponseModels\Deprecated\WalletTransactionCorpObsolete.cs" />
     <Compile Include="Models\EsiResponseModels\NameToIdResponse.cs" />
+    <Compile Include="Models\EsiResponseModels\RolesEnum.cs" />
+    <Compile Include="Models\EsiResponseModels\SearchResponse.cs" />
     <Compile Include="Models\EsiResponseModels\UniverseNameResponse.cs" />
     <Compile Include="Models\EsiResponseModels\UniverseStructureResponse.cs" />
-    <Compile Include="Models\EsiResponseModels\WalletDataModels.cs" />
-    <Compile Include="Models\EsiResponseModels\WalletJournalModelCharV4.cs" />
+    <Compile Include="Models\EsiResponseModels\Enums.cs" />
+    <Compile Include="Models\EsiResponseModels\CharacterWalletJournalModel.cs" />
     <Compile Include="Models\EsiTokenExtended.cs" />
     <Compile Include="Models\ThirdPartyResponseModels\MarketStatMarketerResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\Entities\EveCharacter.cs" />
-    <Compile Include="Util\Entities\EveCorporation.cs" />
-    <Compile Include="Util\Entities\EveEntity.cs" />
     <Compile Include="Util\EsiTokenContainerCollection.cs" />
     <Compile Include="Util\EveHelper.cs" />
-    <Compile Include="Util\TokenCollection.cs" />
-    <Compile Include="Util\TokenManager.cs" />
-    <Compile Include="Util\TokenManager\TokenManagerMethods.cs" />
-    <Compile Include="Util\UniverseNameCache.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -193,6 +265,13 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Util\Entities\" />
+    <Folder Include="Util\TokenManager\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Snippets\GetRequest.snippet" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\EVE Enterpreneur\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\EVE Enterpreneur\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

@@ -1,23 +1,31 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using EntrepreneurCommon.Common;
+using EntrepreneurCommon.Common.Attributes;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 
-namespace EntrepreneurCommon.Models.Esi
+namespace EntrepreneurCommon.Models.EsiResponseModels
 {
-    public class CharacterPublicInformation
+    [Table("character_public_information")]
+    [EsiEndpoint("/v4/characters/{character_id}/", false, null)]
+    public class CharacterPublicInformation : IEsiResponseModel
     {
-        [JsonIgnore] public static string Endpoint { get => "/v4/characters/{character_id}/"; }
-        [JsonIgnore] public static string EndpointVersioned { get => "/v4/characters/{character_id}/"; }
+        [Key]
+        [Index("UNIQUE", IsUnique = true)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [RestParameterMapping("character_id")]
+        public int CharacterId { get; set; }
 
-        [J("alliance_id")] public Int32 AllianceID { get; set; }
-        [J("ancestry_id")] public Int32 AncestryID { get; set; }
-        [J("birthday")] public string Birthday { get; set; }
-        [J("bloodline_id")] public Int32 BloodlineID { get; set; }
-        [J("corporation_id")] public Int32 CorporationID { get; set; }
-        [J("description")] public string Description { get; set; }
-        [J("gender")] public string Gender { get; set; }
-        [J("name")] public string Name { get; set; }
-        [J("race_id")] public Int32 RaceId { get; set; }
-        [J("security_status")] public double SecurityStatus { get; set; }
+        public int      AllianceId     { get; set; }
+        public int      AncestryId     { get; set; }
+        public DateTime Birthday       { get; set; }
+        public int      BloodlineId    { get; set; }
+        public int      CorporationId  { get; set; }
+        public string   Description    { get; set; }
+        public string   Gender         { get; set; }
+        public string   Name           { get; set; }
+        public int      RaceId         { get; set; }
+        public double   SecurityStatus { get; set; }
     }
 }

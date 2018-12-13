@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using EntrepreneurCommon.Models;
-using EntrepreneurCommon.Models.Esi;
+using EntrepreneurCommon.Client;
+using EntrepreneurCommon.ExtensionMethods;
+using EntrepreneurCommon.Helpers;
+using EntrepreneurCommon.Models.EsiResponseModels;
 using RestSharp;
 
 namespace EntrepreneurCommon.Api
 {
     public class UniverseApi
     {
-        public EsiApiClient ApiClient { get; set; }
-        private RestClient restClient { get => ApiClient.RestClient; }
+        public IEsiRestClient Client { get; set; }
+        //private RestClient restClient { get => ApiClient.RestClient; }
 
-        public UniverseApi(EsiApiClient apiClient)
+        public UniverseApi(IEsiRestClient client)
         {
-            ApiClient = apiClient;
+            Client = client;
         }
 
         /// <summary>
@@ -21,12 +23,13 @@ namespace EntrepreneurCommon.Api
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        public List<UniverseNameResponse> GetUniverseNames( int[] ids )
+        public List<UniverseNameResponse> GetUniverseNames(int[] ids)
         {
-            var request = new RestRequest(UniverseNameResponse.Endpoint, Method.POST);
-            request.AddJsonBody(ids);
-            var response = ApiClient.Execute<List<UniverseNameResponse>>(request);
-            return response.Data;
+            var request = RequestHelper.GetRestRequest<UniverseNameResponse>()
+                                       .SetMethod(Method.POST)
+                                       .AddJsonBody(ids);
+            var result = Client.Execute<List<UniverseNameResponse>>(request);
+            return result.Data;
         }
 
         /// <summary>
@@ -34,35 +37,42 @@ namespace EntrepreneurCommon.Api
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        public IRestResponse<List<UniverseNameResponse>> GetUniverseNamesResponse( int[] ids )
+        public IRestResponse<List<UniverseNameResponse>> GetUniverseNamesResponse(int[] ids)
         {
-            var request = new RestRequest(UniverseNameResponse.Endpoint, Method.POST);
-            request.AddJsonBody(ids);
-            var response = ApiClient.Execute<List<UniverseNameResponse>>(request);
-            return response;
+            var request = RequestHelper.GetRestRequest<UniverseNameResponse>()
+                                       .SetMethod(Method.POST)
+                                       .AddJsonBody(ids);
+            return Client.Execute<List<UniverseNameResponse>>(request);
         }
 
-        public IRestResponse<SearchResponse> MakeAuthorizedSearch( string searchString, string[] categories, int characterId, string token)
+        public IRestResponse<SearchResponse> MakeAuthorizedSearch(string   searchString,
+                                                                  string[] categories,
+                                                                  int      characterId,
+                                                                  string   token)
         {
             // Categories are comma divided, ie: ?categories=solar_system,station,structure
-            var request = new RestRequest(SearchResponse.Endpoint, Method.GET);
-            request.AddParameter("character_id", characterId,ParameterType.UrlSegment);
-            request.AddParameter("search", searchString);
-            request.AddParameter("categories", String.Join(",", categories));
-            request.AddHeader("Authorization", $"Bearer {token}");
-            var response = ApiClient.Execute<SearchResponse>(request);
-            return response;
+
+            var request = RequestHelper.GetRestRequest<SearchResponse>(token)
+                                       .AddParameter("character_id", characterId, ParameterType.UrlSegment)
+                                       .AddParameter("search",       searchString)
+                                       .AddParameter("categories",   String.Join(",", categories));
+            return Client.Execute<SearchResponse>(request);
         }
 
         public IRestResponse<UniverseStructureResponse> GetStructureInformation(Int64 structureId, string token = null)
         {
-            var request = new RestRequest(UniverseStructureResponse.Endpoint);
-            request.AddParameter("structure_id", structureId, ParameterType.UrlSegment);
-            if (token != null) {
-                request.AddParameter("token", token, ParameterType.QueryString);
-            }
-            var response = ApiClient.Execute<UniverseStructureResponse>(request);
+            var request = RequestHelper.GetRestRequest<UniverseStructureResponse>(token)
+                                       .AddParameter("structure_id", structureId, ParameterType.UrlSegment);
+
+            var response = Client.Execute<UniverseStructureResponse>(request);
             response.Data.StructureId = structureId;
+            return response;
+        }
+
+        public IRestResponse<List<int>> GetRegions()
+        {
+            var request = new RestRequest("/v1/universe/regions/");
+            var response = Client.Execute<List<int>>(request);
             return response;
         }
     }

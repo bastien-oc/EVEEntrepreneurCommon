@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using EntrepreneurCommon.Api;
-using EntrepreneurCommon.Models.Esi;
+using EntrepreneurCommon.Client;
+using EntrepreneurCommon.Models.EsiResponseModels;
 using Newtonsoft.Json;
 
 namespace EntrepreneurCommon.Util
@@ -11,7 +12,7 @@ namespace EntrepreneurCommon.Util
     public class UniverseNameCache:IEnumerable
     {
         public List<UniverseNameResponse> NamesCache = new List<UniverseNameResponse>();
-        private UniverseApi Api = new UniverseApi(new EsiApiClient());
+        private UniverseApi Api = new UniverseApi(new EsiClient());
 
         public string PersistentFilePath { get; set; }
 
