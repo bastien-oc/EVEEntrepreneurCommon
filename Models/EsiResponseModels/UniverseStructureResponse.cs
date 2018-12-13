@@ -1,27 +1,45 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using EntrepreneurCommon.Common;
+using EntrepreneurCommon.Common.Attributes;
 using Newtonsoft.Json;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 
-namespace EntrepreneurCommon.Models
+namespace EntrepreneurCommon.Models.EsiResponseModels
 {
     public class StructurePosition
     {
-        [J("x")] public float X { get; set; }
-        [J("y")] public float Y { get; set; }
-        [J("z")] public float Z { get; set; }
+        [J("x")]
+        public float X { get; set; }
+
+        [J("y")]
+        public float Y { get; set; }
+
+        [J("z")]
+        public float Z { get; set; }
     }
 
     /// <summary>
     /// Returns information on requested structure, if you are on the ACL. Otherwise, returns "Forbidden" for all inputs.
     /// Endpoint: /universe/structures/{structure_id}/
     /// </summary>
-    public class UniverseStructureResponse
+    [EsiEndpoint("/v1/universe/structures/{structure_id}/")]
+    public class UniverseStructureResponse : IEsiResponseModel
     {
-        [JsonIgnore] public static readonly String Endpoint = "/v1/universe/structures/{structure_id}/";
+        [Key]
+        [RestParameterMapping]
         public long StructureId { get; set; }
-        [J("name")] public string Name { get; set; }
-        [J("solar_system_id")] public Int32 SolarSystemID { get; set; }
-        [J("type_id")] public Int32 TypeID { get; set; }
-        [J("position")] public StructurePosition position { get; set; }
+
+        [J("name")]
+        public string Name { get; set; }
+
+        [J("solar_system_id")]
+        public int SolarSystemId { get; set; }
+
+        [J("type_id")]
+        public int TypeId { get; set; }
+
+        [J("position")]
+        public StructurePosition Position { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using EntrepreneurCommon.Models.Esi;
+using EntrepreneurCommon.Models.EsiResponseModels;
 using Newtonsoft.Json;
 
 namespace EntrepreneurCommon.Models.DatabaseModels

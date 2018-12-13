@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using EntrepreneurCommon.Common;
+using EntrepreneurCommon.Common.Attributes;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 
 namespace EntrepreneurCommon.Models.EsiResponseModels
 {
-    public class MarketsMarketGroupResponse
+    [EsiEndpoint("/v1/markets/groups/{market_group_id}/")]
+    public class MarketsMarketGroupResponse : IEsiResponseModel
     {
-        public static string Endpoint { get => "/v1/markets/groups/{market_group_id}/"; }
-
-        [J("market_group_id")] public int MarketGroupId {get;set;}
+        [J("market_group_id")] [Key] public int MarketGroupId {get;set;}
         [J("name")] public string Name { get; set; }
         [J("description")] public string Description { get; set; }
         [J("types")] public List<int> Types { get; set; }

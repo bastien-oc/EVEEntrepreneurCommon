@@ -3,6 +3,8 @@ using System.Data.Entity;
 using System.Data.SQLite;
 using MySql.Data.MySqlClient;
 
+// using MySql.Data.MySqlClient;
+
 namespace EntrepreneurCommon.Common
 {
     public enum DbConnectionType { SqLite, MySql };

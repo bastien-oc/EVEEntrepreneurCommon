@@ -1,25 +1,32 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using EntrepreneurCommon.Common;
+using EntrepreneurCommon.Common.Attributes;
 
 namespace EntrepreneurCommon.Models.EsiResponseModels
 {
+    [Table("corporation_public_information")]
     [EsiEndpoint("/v4/corporations/{corporation_id}/")]
-    public class CorporationPublicInformation
+    public class CorporationPublicInformation : IEsiResponseModel
     {
-        public static string Route { get => "/v4/corporations/{corporation_id}/"; }
+        [Key]
+        [RestParameterMapping("corporation_id")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int CorporationId { get; set; }
 
-        public Int32 AllianceId { get; set; }
-        public Int32 CeoId { get; set; }
-        public Int32 CreatorId { get; set; }
-        public DateTime DateFounded { get; set; }
-        public String Description { get; set; }
-        public Int32 FactionId { get; set; }
-        public Int32 HomeStationId { get; set; }
-        public Int32 MemberCount { get; set; }
-        public String Name { get; set; }
-        public Int64 Shares { get; set; }
-        public Single TaxRate { get; set; }
-        public String Ticker { get; set; }
-        public String Url { get; set; }
+        public int?      AllianceId    { get; set; }
+        public int       CeoId         { get; set; }
+        public int       CreatorId     { get; set; }
+        public DateTime? DateFounded   { get; set; }
+        public string    Description   { get; set; }
+        public int?      FactionId     { get; set; }
+        public int?      HomeStationId { get; set; }
+        public int       MemberCount   { get; set; }
+        public string    Name          { get; set; }
+        public long?     Shares        { get; set; }
+        public float     TaxRate       { get; set; }
+        public string    Ticker        { get; set; }
+        public string    Url           { get; set; }
     }
 }

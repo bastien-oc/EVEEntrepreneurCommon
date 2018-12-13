@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using EntrepreneurCommon.Authentication;
-using EntrepreneurCommon.Models.Esi;
+using EntrepreneurCommon.Models.EsiResponseModels;
 
 namespace EntrepreneurCommon.Util.Entities
 {

@@ -1,4 +1,7 @@
 ﻿using System;
+using EntrepreneurCommon.Client;
+using EntrepreneurCommon.ExtensionMethods;
+using EntrepreneurCommon.Helpers;
 using EntrepreneurCommon.Models.EsiResponseModels;
 using RestSharp;
 
@@ -6,19 +9,23 @@ namespace EntrepreneurCommon.Api
 {
     public class CorporationApi : CommonApi
     {
-        // private EsiApiClient ApiClient { get; set; }
-
-        public CorporationApi(EsiApiClient apiClient) : base(apiClient)
+        public CorporationApi(IEsiRestClient client) : base(client)
         {
-            this.ApiClient = apiClient;
+            this.Client = client;
         }
 
         public IRestResponse<CorporationPublicInformation> GetPublicInformation(Int32 id)
         {
-            var request = new RestRequest(CorporationPublicInformation.Route);
-            request.AddParameter("corporation_id", id, ParameterType.UrlSegment);
-            var response = this.ApiClient.Execute<CorporationPublicInformation>(request);
-            return response;
+
+            var request = RequestHelper.GetRestRequest<CorporationPublicInformation>().SetCorporationId(id);
+            return Client.Execute<CorporationPublicInformation>(request);
+        }
+
+        public IRestResponse<AlliancePublicInformationModel> GetAllianceInformation(Int32 id)
+        {
+            var request = RequestHelper.GetRestRequest<AlliancePublicInformationModel>()
+                                       .AddParameter("alliance_id", id, ParameterType.QueryString);
+            return Client.Execute<AlliancePublicInformationModel>(request);
         }
     }
 }
