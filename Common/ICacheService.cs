@@ -5,7 +5,7 @@ using System.Runtime.Caching;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntrepreneurCommon.Client
+namespace EntrepreneurCommon.Common
 {
     public interface ICacheService
     {
@@ -15,10 +15,7 @@ namespace EntrepreneurCommon.Client
 
     public class InMemoryCache : ICacheService
     {
-        public T Get<T>(string cacheKey) where T : class
-        {
-            return MemoryCache.Default.Get(cacheKey) as T;
-        }
+        public T Get<T>(string cacheKey) where T : class => MemoryCache.Default.Get(cacheKey) as T;
 
         public void Set(string cacheKey, object item, int minutes)
         {
