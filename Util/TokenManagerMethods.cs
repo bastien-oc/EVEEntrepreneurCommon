@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using EntrepreneurCommon.Authentication;
+using EntrepreneurCommon.Models.EsiResponseModels;
 
 namespace EntrepreneurCommon.Util
 {
@@ -37,7 +38,7 @@ namespace EntrepreneurCommon.Util
             var result = from r in NamesCache.NamesCache
                          where r.Name == name
                          select r;
-            return result.First().ID;
+            return Enumerable.First<UniverseNameResponse>(result).ID;
         }
 
         /// <summary>
@@ -116,7 +117,7 @@ namespace EntrepreneurCommon.Util
 
         public EsiTokenInfo GetTokenWithScope(int CharacterId, string scope)
         {
-            return Tokens.FirstOrDefault(x => x.CharacterId == CharacterId && x.CheckScope(scope));
+            return Enumerable.FirstOrDefault<EsiTokenInfo>(Tokens, x => x.CharacterId == CharacterId && x.CheckScope(scope));
         }
     }
 }

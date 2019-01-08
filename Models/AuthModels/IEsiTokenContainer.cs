@@ -1,4 +1,5 @@
-﻿using EntrepreneurCommon.Client;
+﻿using System.ComponentModel.DataAnnotations;
+using EntrepreneurCommon.Client;
 
 namespace EntrepreneurCommon.Authentication {
     /// <summary>
@@ -6,6 +7,6 @@ namespace EntrepreneurCommon.Authentication {
     /// </summary>
     public interface IEsiTokenContainer: IEsiTokenVerification, IEsiTokenResponse
     {
-        EsiAuthClient AuthClient { get; set; }
+        new string TokenType { get; set; }
     }
 }

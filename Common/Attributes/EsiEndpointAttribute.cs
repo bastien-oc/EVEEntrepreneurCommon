@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EntrepreneurCommon.Common
+namespace EntrepreneurCommon.Common.Attributes
 {
     public class EsiEndpointAttribute : Attribute
     {
@@ -16,8 +12,15 @@ namespace EntrepreneurCommon.Common
             ScopesRequired = scopes ?? default;
         }
 
-        public string Endpoint { get; set; }
-        public Boolean IsPaginated { get; set; }
+        // public EsiEndpointAttribute(string endpoint, bool isPaginated = false, string scope = null)
+        // {
+        //     Endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
+        //     IsPaginated = isPaginated;
+        //     ScopesRequired = scope == null ? default : new[] {scope};
+        // }
+
+        public string   Endpoint       { get; set; }
+        public bool     IsPaginated    { get; set; }
         public string[] ScopesRequired { get; set; }
 
         public static string GetEndpointUrl(object data)
@@ -27,10 +30,9 @@ namespace EntrepreneurCommon.Common
             if (info != null) {
                 return info.Endpoint;
             }
-            else {
-                throw new Exception(
-                    $"The object {nameof(data)} is of type {data.GetType()} which does not implement attribut EsiEndpoint.");
-            }
+
+            throw new Exception(
+                                $"The object {nameof(data)} is of type {data.GetType()} which does not implement attribut EsiEndpoint.");
         }
     }
 }
