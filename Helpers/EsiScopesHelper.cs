@@ -95,13 +95,13 @@ namespace EntrepreneurCommon.Authentication
         /// <returns></returns>
         public static string ParseScopes(params string[] scopes)
         {
-            var _str = "";
+            var str = "";
             foreach (var s in scopes) {
-                _str += $"{s} ";
+                str += $"{s} ";
             }
 
-            _str = _str.Trim();
-            return _str;
+            str = str.Trim();
+            return str;
         }
 
         /// <summary>

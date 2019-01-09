@@ -7,6 +7,7 @@ using EntrepreneurCommon.ExtensionMethods;
 
 namespace EntrepreneurCommon.Authentication
 {
+    /// <inheritdoc />
     /// <summary>
     /// A wrapper class containing all required fields and properties to perform token operations.
     /// Purpose of this class is the ability to store it persistently in a database or file, using it as a heart of information.

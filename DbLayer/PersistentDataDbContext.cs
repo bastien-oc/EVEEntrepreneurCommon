@@ -45,6 +45,7 @@ namespace EntrepreneurCommon.DbLayer
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            // Ensure snake_case naming convention for consistency across databases
             modelBuilder.Properties().Configure(c => {
                                                     var name    = c.ClrPropertyInfo.Name;
                                                     var newName = name.ToSnakeCase();
