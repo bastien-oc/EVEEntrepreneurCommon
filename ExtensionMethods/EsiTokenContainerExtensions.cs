@@ -31,9 +31,7 @@ namespace EntrepreneurCommon.ExtensionMethods
         
         public static bool CheckScope(this IEsiTokenVerification token, string scope)
         {
-            if (string.IsNullOrEmpty(scope)) return true;
-            if (token.Scopes.ToLower().Contains(scope.ToLower())) return true;
-            return false;
+            return string.IsNullOrEmpty(scope) || token.Scopes.ToLower().Contains(scope.ToLower());
         }
     }
 }

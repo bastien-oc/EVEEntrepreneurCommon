@@ -13,9 +13,6 @@ namespace EntrepreneurCommon.Models.DatabaseModels
         /// </summary>
         [Column("type_id", Order = 1)] [Key, DatabaseGenerated(DatabaseGeneratedOption.None)] public int TypeId { get; set; }
 
-        /// <summary>
-        /// SystemId or RegionId
-        /// </summary>
         //[Column("location_id")] public int? Location { get; set; }
         /// <summary>
         /// Generated at (UNIX Timestamp msec)

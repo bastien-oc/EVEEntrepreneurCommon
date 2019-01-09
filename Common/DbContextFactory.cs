@@ -11,17 +11,17 @@ namespace EntrepreneurCommon.Common
 
     public static class DbContextFactory
     {
-
+        [Obsolete("Obsoleted by the DatabaseEf class.")]
         public static T CreateDbContext<T>(DbConnectionType connectionType, string connectionString) where T : DbContext
         {
             switch (connectionType) {
                 case DbConnectionType.MySql:
-                    var mysql_connection = new MySqlConnection(connectionString);
-                    return (T)Activator.CreateInstance(typeof(T), new object[] { mysql_connection, true });
+                    var mysqlConnection = new MySqlConnection(connectionString);
+                    return (T)Activator.CreateInstance(typeof(T), new object[] { mysqlConnection, true });
                 case DbConnectionType.SqLite:
-                    var sqlite_connection = new SQLiteConnection(connectionString);
-                    sqlite_connection.Open();
-                    return (T)Activator.CreateInstance(typeof(T), new object[] { sqlite_connection, true });
+                    var sqliteConnection = new SQLiteConnection(connectionString);
+                    sqliteConnection.Open();
+                    return (T)Activator.CreateInstance(typeof(T), new object[] { sqliteConnection, true });
                 default:
                     return null;
             }
